@@ -1,0 +1,119 @@
+/* ==========================================================================
+   NOIR shop (the full collection): toolbar with category chips, search and sort.
+   The product grid and cards are shared, see store.css.
+   ========================================================================== */
+
+.n-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+
+.n-chips {
+  display: flex;
+  gap: 8px;
+  margin-inline: calc(var(--n-gutter) * -1);
+  padding-inline: var(--n-gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.n-chips::-webkit-scrollbar { display: none; }
+
+.n-chip {
+  flex: none;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--n-line);
+  border-radius: 999px;
+  background: var(--n-paper);
+  color: var(--n-ink);
+  font: 500 0.9375rem/1 var(--n-sans);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.n-chips__sep {
+  flex: 0 0 1px;
+  align-self: stretch;
+  margin: 6px 2px;
+  background: var(--n-line, rgba(12, 12, 12, 0.14));
+}
+
+.n-chip[hidden] { display: none; }
+
+.n-chip:hover { border-color: var(--n-ink); }
+
+.n-chip[aria-pressed="true"] {
+  background: var(--n-ink);
+  border-color: var(--n-ink);
+  color: var(--n-paper);
+}
+
+.n-tools {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.n-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.n-field svg {
+  position: absolute;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--n-muted);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.n-field input,
+.n-field select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--n-line);
+  border-radius: var(--n-radius-sm);
+  background: var(--n-paper);
+  color: var(--n-ink);
+  font: 400 1rem/1.2 var(--n-sans);
+}
+
+.n-field input { padding: 0 14px 0 44px; }
+.n-field select { padding: 0 36px 0 14px; appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.n-field input:hover,
+.n-field select:hover { border-color: var(--n-ink); }
+
+.n-field input::placeholder { color: var(--n-muted); opacity: 1; }
+
+.n-field input:focus-visible,
+.n-field select:focus-visible {
+  outline: none;
+  outline-offset: 0;
+  border-color: var(--n-ink);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .n-toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .n-chips { margin-inline: 0; padding-inline: 0; overflow: visible; flex-wrap: wrap; }
+
+  .n-tools { grid-template-columns: 260px 200px; }
+}

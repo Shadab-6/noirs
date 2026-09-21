@@ -1,0 +1,812 @@
+/* ==========================================================================
+   NOIR product detail page (product.html)
+   Everything lives under .pd-page. palette.css deliberately skips .pd-page,
+   so text, button and surface colours here are set normally (no !important).
+   ========================================================================== */
+
+.pd-page {
+  --pd-ink: #0c0c0c;
+  --pd-muted: #6b6b68;
+  --pd-line: rgba(12, 12, 12, 0.1);
+  --pd-surface: #f4f4f1;
+  --pd-chip: #ebebe7;
+  --pd-radius: 28px;
+
+  padding: 32px 0 120px;
+  min-height: calc(100vh - 92px);
+  color: var(--pd-ink);
+}
+
+/* Same content width and side margins as the shared header, so the logo and the page line up. */
+.pd-page > .container {
+  width: 100%;
+  max-width: var(--n-max, 1360px);
+  padding-inline: var(--n-gutter, 5%);
+}
+
+/* ---------- Breadcrumb ---------- */
+
+.pd-breadcrumb {
+  margin-bottom: 28px;
+}
+
+.pd-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.pd-breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  color: var(--pd-muted);
+}
+
+.pd-breadcrumb li + li::before {
+  content: "/";
+  margin: 0 8px;
+  color: rgba(12, 12, 12, 0.3);
+}
+
+.pd-breadcrumb a {
+  color: var(--pd-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pd-breadcrumb a:hover {
+  color: var(--pd-ink);
+}
+
+.pd-breadcrumb [aria-current="page"] span {
+  color: var(--pd-ink);
+  font-weight: 600;
+}
+
+/* ---------- Layout ---------- */
+
+.product-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 72px;
+  align-items: start;
+  animation: pd-rise 0.6s cubic-bezier(0.22, 0.8, 0.28, 1) both;
+}
+
+@keyframes pd-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Gallery ---------- */
+
+.pd-gallery {
+  position: sticky;
+  top: calc(var(--n-header-h, 76px) + 24px);
+}
+
+.pd-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--pd-radius);
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-line);
+  box-shadow: 0 30px 60px -30px rgba(12, 12, 12, 0.28);
+}
+
+.pd-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 150px);
+  object-fit: contain;
+  /* The photos are shot on white; multiply lets that white take on the card tone. */
+  mix-blend-mode: multiply;
+  transition: transform 0.7s cubic-bezier(0.22, 0.8, 0.28, 1);
+}
+
+.pd-media:hover img {
+  transform: scale(1.04);
+}
+
+/* Photos that come with their own backdrop fill the card (ratio is set from the photo in JS). */
+.pd-media.is-photo {
+  aspect-ratio: 4 / 5;
+}
+
+.pd-media.is-photo img {
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  mix-blend-mode: normal;
+}
+
+.pd-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--pd-ink);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ---------- Details column ---------- */
+
+.pd-info {
+  padding-top: 8px;
+}
+
+.pd-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--pd-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.pd-kicker i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pd-info h1 {
+  max-width: 560px;
+  margin: 0 0 18px;
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.pd-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  font-size: 14px;
+}
+
+.pd-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.pd-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pd-ink);
+}
+
+.pd-rating small {
+  color: var(--pd-muted);
+  font-size: 13px;
+}
+
+/* Price */
+
+.pd-price {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.pd-price-now {
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.pd-price-old {
+  color: var(--pd-muted);
+  font-size: 19px;
+  text-decoration: line-through;
+}
+
+.pd-price-off {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--pd-ink);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.pd-saving {
+  margin: 10px 0 0;
+  color: #0d7a3e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pd-description {
+  max-width: 540px;
+  margin: 24px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--pd-line);
+  color: #3f3f3c;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Size */
+
+.pd-block {
+  margin-top: 30px;
+}
+
+.pd-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pd-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pd-size-picked {
+  color: var(--pd-muted);
+  font-size: 13px;
+}
+
+.pd-size-picked.is-set {
+  color: var(--pd-ink);
+  font-weight: 600;
+}
+
+.pd-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pd-size {
+  min-width: 60px;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid rgba(12, 12, 12, 0.18);
+  border-radius: 14px;
+  background: #ffffff;
+  color: var(--pd-ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.pd-size:hover {
+  border-color: var(--pd-ink);
+}
+
+.pd-size:active {
+  transform: scale(0.96);
+}
+
+.pd-size.active {
+  background: var(--pd-ink);
+  border-color: var(--pd-ink);
+  color: #ffffff;
+}
+
+.pd-error {
+  margin: 12px 0 0;
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pd-error[hidden] {
+  display: none;
+}
+
+.pd-block.has-error .pd-sizes {
+  animation: pd-shake 0.4s ease;
+}
+
+.pd-block.has-error .pd-size:not(.active) {
+  border-color: rgba(180, 35, 24, 0.55);
+}
+
+@keyframes pd-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* Quantity + add to cart */
+
+.pd-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.pd-qty {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 58px;
+  padding: 0 6px;
+  border: 1px solid rgba(12, 12, 12, 0.18);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.pd-qty button {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--pd-ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pd-qty button:hover:not(:disabled) {
+  background: var(--pd-chip);
+}
+
+.pd-qty button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pd-qty output {
+  min-width: 34px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Black button, white text */
+.pd-add {
+  flex: 1;
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 28px;
+  border: none;
+  border-radius: 16px;
+  background: #000000;
+  color: #ffffff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.pd-add:hover {
+  background: #1c1c1c;
+  box-shadow: 0 14px 28px -12px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.pd-add:active {
+  transform: scale(0.99);
+}
+
+.pd-add.is-added {
+  background: #0d7a3e;
+}
+
+.pd-add-icon {
+  display: inline-flex;
+}
+
+/* Assurances */
+
+.pd-assurances {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 34px 0 0;
+  padding: 26px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--pd-line);
+}
+
+.pd-assurances li {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-assure-icon {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--pd-surface);
+  color: var(--pd-ink);
+}
+
+.pd-assurances strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.pd-assurances span:not(.pd-assure-icon) {
+  display: block;
+  color: var(--pd-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ---------- Related products ---------- */
+
+.pd-related {
+  margin-top: 110px;
+  padding-top: 60px;
+  border-top: 1px solid var(--pd-line);
+}
+
+.pd-related[hidden] {
+  display: none;
+}
+
+.pd-related-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.pd-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--pd-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.pd-related-head h2 {
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 40px);
+  letter-spacing: -0.02em;
+}
+
+.pd-related-all {
+  flex: 0 0 auto;
+  padding: 10px 18px;
+  border: 1px solid rgba(12, 12, 12, 0.18);
+  border-radius: 999px;
+  color: var(--pd-ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pd-related-all:hover {
+  background: var(--pd-ink);
+  color: #ffffff;
+}
+
+.pd-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.pd-related-card {
+  display: block;
+  color: var(--pd-ink);
+  text-decoration: none;
+}
+
+.pd-related-media {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-line);
+}
+
+.pd-related-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6%;
+  mix-blend-mode: multiply;
+  transition: transform 0.6s cubic-bezier(0.22, 0.8, 0.28, 1);
+}
+
+.pd-related-media.is-photo img {
+  padding: 0;
+  mix-blend-mode: normal;
+}
+
+.pd-related-card:hover .pd-related-media img {
+  transform: scale(1.06);
+}
+
+.pd-related-info {
+  padding: 14px 4px 0;
+}
+
+.pd-related-info h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pd-related-info p {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.pd-related-info s {
+  color: var(--pd-muted);
+  font-size: 13px;
+}
+
+/* ---------- Sticky add-to-cart bar (phones) ---------- */
+
+.pd-sticky {
+  display: none;
+}
+
+.pd-add:focus-visible,
+.pd-size:focus-visible,
+.pd-qty button:focus-visible,
+.pd-related-card:focus-visible,
+.pd-related-all:focus-visible,
+.pd-breadcrumb a:focus-visible {
+  outline: 2px solid rgba(12, 12, 12, 0.55);
+  outline-offset: 3px;
+}
+
+/* ---------- Card button (kept from previous version) ---------- */
+
+.view-product-btn {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 16px;
+  border-radius: 50px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .product-wrapper {
+    gap: 44px;
+  }
+
+  .pd-assurances {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .pd-assurances li {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .pd-related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .pd-page {
+    padding: 20px 0 132px;
+  }
+
+  .pd-breadcrumb {
+    margin-bottom: 18px;
+  }
+
+  .product-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .pd-gallery {
+    position: static;
+  }
+
+  .pd-media {
+    border-radius: 22px;
+  }
+
+  .pd-media img {
+    max-height: none;
+  }
+
+  .pd-info {
+    padding-top: 0;
+  }
+
+  .pd-related {
+    margin-top: 70px;
+    padding-top: 44px;
+  }
+
+  /* Sticky bar: price + add to cart follow the shopper down the page. */
+  .pd-sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--pd-line);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(110%);
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .pd-sticky.is-visible {
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .pd-sticky-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .pd-sticky-info strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+
+  .pd-sticky-info span {
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .pd-add-compact {
+    flex: 0 0 auto;
+    min-height: 50px;
+    padding: 0 26px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .pd-info h1 {
+    font-size: 34px;
+  }
+
+  .pd-price-now {
+    font-size: 32px;
+  }
+
+  .pd-sizes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .pd-size {
+    min-width: 0;
+    height: 50px;
+    padding: 0;
+  }
+
+  .pd-actions {
+    gap: 10px;
+  }
+
+  .pd-qty {
+    height: 54px;
+  }
+
+  .pd-qty button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pd-add {
+    min-height: 54px;
+    padding: 0 16px;
+  }
+
+  .pd-related-grid {
+    gap: 14px;
+  }
+
+  .pd-related-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-wrapper,
+  .pd-block.has-error .pd-sizes {
+    animation: none;
+  }
+
+  .pd-media img,
+  .pd-related-media img,
+  .pd-sticky {
+    transition: none;
+  }
+}
+
+/* Phones: the shared tab bar sits at the bottom, so the sticky add-to-cart bar rides just above it. */
+@media (max-width: 767px) {
+  .pd-sticky {
+    bottom: calc(var(--n-tab-h, 64px) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 12px;
+  }
+}

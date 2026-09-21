@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="NOIR favicon">
+  <defs>
+    <style>
+      .brand { fill: #f1efe8; }
+      .slash { fill: #d8d1c5; }
+      .word { fill: #f1efe8; font-family: Georgia, 'Times New Roman', serif; letter-spacing: 10px; }
+    </style>
+  </defs>
+
+  <rect width="512" height="512" rx="96" fill="#070707"/>
+
+  <g>
+    <path class="brand" d="M170 88h54v304h-54V88zm150 0h54v304h-54V88zm-116 62h54l66 234h-54L204 150zm98 0h54l-66 234h-54l66-234z"/>
+    <path class="slash" d="M273 88l112 306h-46L227 88h46z" opacity="0.9"/>
+  </g>
+
+  <text class="word" x="256" y="420" font-size="48" text-anchor="middle">NOIR.</text>
+</svg>

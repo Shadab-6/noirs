@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Checkout | NOIR.</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/noir-favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/store.css">
+  <link rel="stylesheet" href="assets/css/checkout.css">
+  <link rel="stylesheet" href="assets/css/cart.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/palette.css">
+
+  <link rel="stylesheet" href="assets/css/gate.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="n-chrome">
+    <header class="n-header">
+      <div class="n-menu-scrim" id="menuScrim"></div>
+      <div class="n-wrap n-header__bar">
+        <a class="n-wordmark" href="index.html" aria-label="NOIR. home">NOIR.</a>
+
+        <nav class="n-nav" id="siteMenu" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="shop.html">Shop</a>
+          <a class="n-nav__mobile-only" href="wishlist.html">Wishlist</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a class="n-nav__mobile-only" href="account.html">Account</a>
+        </nav>
+
+        <div class="n-actions">
+          <a class="n-icon-btn" href="shop.html?search=1" aria-label="Search the shop"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>
+          <a class="n-icon-btn n-desktop-only" href="wishlist.html" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n-badge" data-wish-count hidden>0</span></a>
+          <button class="n-icon-btn" id="cartBtn" type="button" aria-label="Open bag"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="n-badge" id="cartCount" hidden>0</span></button>
+          <a class="n-icon-btn n-desktop-only" href="account.html" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a>
+          <button class="n-icon-btn n-menu-btn" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteMenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i-open" d="M4 7h16M4 12h16M4 17h16"/><path class="i-close" d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- CHECKOUT -->
+  <main class="co-page">
+
+    <div class="container co-container">
+
+      <header class="co-header">
+        <div class="co-heading">
+          <h1 id="coTitle">Checkout</h1>
+          <p id="coSubtitle">Almost there. Complete your order.</p>
+        </div>
+
+        <ol class="co-stepper" id="coStepper" aria-label="Checkout progress">
+          <li class="is-current" data-step="1"><span class="co-step-dot">1</span><span class="co-step-label">Shipping</span></li>
+          <li data-step="2"><span class="co-step-dot">2</span><span class="co-step-label">Payment</span></li>
+          <li data-step="3"><span class="co-step-dot">3</span><span class="co-step-label">Review</span></li>
+        </ol>
+      </header>
+
+      <!-- Empty cart -->
+      <section class="co-empty" id="coEmpty" hidden>
+        <div class="co-empty-icon">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12a1 1 0 01-1 1H7a1 1 0 01-1-1L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>
+        </div>
+        <h2>Your cart is empty</h2>
+        <p>Add something you love before checking out.</p>
+        <a class="co-btn-dark" href="shop.html">Continue Shopping</a>
+      </section>
+
+      <!-- Checkout form -->
+      <form class="co-layout" id="checkoutForm" novalidate hidden>
+
+        <div class="co-main">
+
+          <section class="co-section" aria-labelledby="coContactTitle">
+            <h2 id="coContactTitle"><span>1.</span> Contact Information</h2>
+            <p class="co-section-note">We'll use this to send order updates.</p>
+
+            <div class="co-field  has-icon" data-field="email">
+              <div class="co-box">
+              <span class="co-field-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><label for="coEmail">Email address</label>
+              <input id="coEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" >
+              </div>
+              <p class="co-error" id="coEmailError" role="alert"></p>
+            </div>
+
+            <label class="co-check">
+              <input type="checkbox" id="coOffers" name="marketingOptIn" checked>
+              <span class="co-check-box" aria-hidden="true"></span>
+              <span>Email me with news and offers</span>
+            </label>
+          </section>
+
+          <section class="co-section co-address-section" aria-labelledby="coAddressTitle">
+            <h2 id="coAddressTitle">Shipping Address</h2>
+            <p class="co-section-note" id="coAddressNote">Choose where you'd like your order delivered.</p>
+
+            <!-- Signed-in customers with saved addresses get a compact selector instead of a large form. -->
+            <div class="co-address-selector" id="coAddressSelector" hidden>
+              <button class="co-address-bar" id="coAddressBar" type="button" aria-expanded="false" aria-controls="coAddressPanel">
+                <span class="co-address-bar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                    <circle cx="12" cy="10" r="2.5"/>
+                  </svg>
+                </span>
+                <span class="co-address-bar-copy">
+                  <small id="coAddressBarEyebrow">Deliver to</small>
+                  <strong id="coAddressBarLabel">Home</strong>
+                  <span id="coAddressBarSummary">Select a saved address</span>
+                </span>
+                <span class="co-address-bar-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </button>
+
+              <div class="co-address-panel" id="coAddressPanel" hidden>
+                <div class="co-address-panel-head">
+                  <strong>Saved addresses</strong>
+                  <span>Select one to continue</span>
+                </div>
+                <div class="co-saved-addresses" id="coSavedAddresses"></div>
+                <button class="co-address-other" id="coAddressOther" type="button">
+                  <span aria-hidden="true">＋</span> Use a different address
+                </button>
+              </div>
+            </div>
+
+            <div id="coAddressForm">
+              <div class="co-grid co-grid-2">
+              <div class="co-field " data-field="name">
+                <div class="co-box">
+                <label for="coName">Full name</label>
+                <input id="coName" name="name" type="text" placeholder="Your full name" autocomplete="name" >
+                </div>
+                <p class="co-error" id="coNameError" role="alert"></p>
+              </div>
+              <div class="co-field " data-field="phone">
+                <div class="co-box">
+                <label for="coPhone">Phone number</label>
+                <input id="coPhone" name="phone" type="tel" placeholder="98765 43210" autocomplete="tel" inputmode="tel">
+                </div>
+                <p class="co-error" id="coPhoneError" role="alert"></p>
+              </div>
+              </div>
+
+              <div class="co-field co-field-wide" data-field="address">
+                <div class="co-box">
+                <label for="coAddress">Address</label>
+                <input id="coAddress" name="address" type="text" placeholder="House / flat no., street, area" autocomplete="street-address" >
+                </div>
+                <p class="co-error" id="coAddressError" role="alert"></p>
+              </div>
+
+              <div class="co-grid co-grid-3">
+              <div class="co-field " data-field="city">
+                <div class="co-box">
+                <label for="coCity">City</label>
+                <input id="coCity" name="city" type="text" placeholder="City" autocomplete="address-level2" >
+                </div>
+                <p class="co-error" id="coCityError" role="alert"></p>
+              </div>
+                <div class="co-field co-select" data-field="state">
+                <div class="co-box">
+                  <label for="coState">State</label>
+                  <select id="coState" name="state" autocomplete="address-level1" required>
+                    <option value="">Select state</option>
+                  </select>
+                  <span class="co-select-chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+                </div>
+                  <p class="co-error" id="coStateError" role="alert"></p>
+                </div>
+              <div class="co-field " data-field="pin">
+                <div class="co-box">
+                <label for="coPin">PIN code</label>
+                <input id="coPin" name="pin" type="text" placeholder="110016" autocomplete="postal-code" inputmode="numeric" maxlength="6">
+                </div>
+                <p class="co-error" id="coPinError" role="alert"></p>
+              </div>
+              </div>
+            </div>
+          </section>
+
+          <fieldset class="co-section co-fieldset">
+            <legend>Shipping Method</legend>
+
+            <div class="co-choices" id="coShippingChoices">
+            <label class="co-choice is-selected" data-ship="standard">
+              <input type="radio" name="shippingMethod" value="standard" checked>
+              <span class="co-radio" aria-hidden="true"></span>
+              <span class="co-choice-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7z"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></span>
+              <span class="co-choice-text"><strong>Standard Shipping</strong><small>3–7 business days</small></span><span class="co-choice-price" id="coStandardPrice"></span>
+            </label>
+            <label class="co-choice" data-ship="express">
+              <input type="radio" name="shippingMethod" value="express">
+              <span class="co-radio" aria-hidden="true"></span>
+              <span class="co-choice-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7z"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></span>
+              <span class="co-choice-text"><strong>Express Shipping</strong><small>1–3 business days</small></span><span class="co-choice-price" id="coExpressPrice"></span>
+            </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <aside class="co-summary" aria-labelledby="coSummaryTitle">
+
+          <div class="co-summary-head">
+            <h2 id="coSummaryTitle">Order Summary</h2>
+            <a href="#" id="coEditCart">Edit Cart</a>
+          </div>
+
+          <div class="co-items" id="coItems"></div>
+
+          <div class="co-coupon">
+            <label for="coCouponInput">Discount Code</label>
+            <div class="co-coupon-row">
+              <input id="coCouponInput" type="text" placeholder="Enter coupon code" autocomplete="off" autocapitalize="characters" spellcheck="false">
+              <button type="button" id="coCouponApply">Apply</button>
+            </div>
+            <p class="co-coupon-msg" id="coCouponMsg" aria-live="polite"></p>
+          </div>
+
+          <dl class="co-totals">
+            <div><dt>Subtotal</dt><dd id="coSubtotal">₹0</dd></div>
+            <div id="coDiscountRow" hidden><dt>Discount</dt><dd id="coDiscount" class="is-good">₹0</dd></div>
+            <div><dt>Shipping</dt><dd id="coShipping">₹0</dd></div>
+          </dl>
+
+          <div class="co-total">
+            <span>Total</span>
+            <strong id="coTotal">₹0</strong>
+          </div>
+          <p class="co-tax-note">Inclusive of all taxes</p>
+
+          <fieldset class="co-payment co-fieldset">
+            <legend>Payment Method</legend>
+            <p class="co-section-note">Choose a secure payment option.</p>
+
+            <div class="co-choices co-choices-compact" id="coPaymentChoices">
+            <label class="co-choice is-selected" data-pay="upi">
+              <input type="radio" name="paymentMethod" value="upi" checked>
+              <span class="co-radio" aria-hidden="true"></span>
+              <span class="co-choice-icon"><span class="co-upi">UPI</span></span>
+              <span class="co-choice-text"><strong>UPI</strong><small>Pay with any UPI app</small></span>
+            </label>
+            <label class="co-choice" data-pay="card">
+              <input type="radio" name="paymentMethod" value="card">
+              <span class="co-radio" aria-hidden="true"></span>
+              <span class="co-choice-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg></span>
+              <span class="co-choice-text"><strong>Card</strong><small>Visa, Mastercard, Rupay</small></span>
+            </label>
+            <label class="co-choice" data-pay="netbanking">
+              <input type="radio" name="paymentMethod" value="netbanking">
+              <span class="co-radio" aria-hidden="true"></span>
+              <span class="co-choice-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18"/></svg></span>
+              <span class="co-choice-text"><strong>Net Banking</strong><small>All major banks</small></span>
+            </label>
+            <label class="co-choice" data-pay="wallet">
+              <input type="radio" name="paymentMethod" value="wallet">
+              <span class="co-radio" aria-hidden="true"></span>
+              <span class="co-choice-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 016.5 5H18v3M4 7.5V17a2 2 0 002 2h13a1 1 0 001-1v-9a1 1 0 00-1-1H6.5A2.5 2.5 0 014 7.5z"/><circle cx="16" cy="13.5" r="1.2"/></svg></span>
+              <span class="co-choice-text"><strong>Wallets</strong><small>Paytm, PhonePe, Amazon Pay</small></span>
+            </label>
+            </div>
+          </fieldset>
+
+          <p class="co-form-error" id="coFormError" role="alert" hidden></p>
+
+          <button class="co-place" id="coPlace" type="submit">
+            <span class="co-place-text">Place Order</span>
+            <span class="co-place-arrow" aria-hidden="true">→</span>
+          </button>
+
+          <p class="co-secure"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg> Secure checkout. Your details are only used to process this order.</p>
+        </aside>
+
+      </form>
+
+      <!-- Order confirmation (step 3) -->
+      <div id="coGate" hidden></div>
+
+      <section class="co-confirm" id="coConfirm" hidden aria-live="polite"></section>
+
+    </div>
+
+    <!-- Mobile: total + Place Order stay reachable while scrolling -->
+    <div class="co-sticky" id="coSticky" aria-hidden="true">
+      <div class="co-sticky-total">
+        <small>Total</small>
+        <strong id="coStickyTotal">₹0</strong>
+      </div>
+      <button type="button" class="co-place co-place-compact" id="coStickyPlace">
+        <span class="co-place-text">Place Order</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- CART -->
+
+  <!-- JS -->
+    <!-- CART SIDEBAR (opens from the bag icon on every page) -->
+  <aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <header class="cart-header">
+      <div class="cart-header-copy">
+        <h2 id="cartTitle">Your Cart</h2>
+        <span id="cartItemCount">0 items</span>
+      </div>
+      <button id="closeCart" class="close-cart-btn" type="button" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <footer class="cart-summary-box">
+      <details class="coupon-toggle" id="couponToggle">
+        <summary>
+          <span>Have a coupon code?</span>
+          <svg class="coupon-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="coupon-box">
+          <input id="couponInput" type="text" placeholder="Enter coupon code" aria-label="Coupon code" autocomplete="off" autocapitalize="characters" />
+          <button id="couponApplyBtn" type="button">Apply</button>
+        </div>
+        <p id="couponMessage" class="coupon-message" aria-live="polite"></p>
+      </details>
+
+      <div class="summary-lines">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+
+        <div class="summary-row shipping-row">
+          <span>Shipping</span>
+          <span id="cartShipping">Free</span>
+        </div>
+
+        <div class="summary-row discount-row" id="discountRow" hidden>
+          <span>Discount</span>
+          <span id="cartDiscount">₹0</span>
+        </div>
+      </div>
+
+      <div class="summary-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+
+      <button class="checkout-btn" id="checkoutBtn" type="button" aria-label="Go to checkout">
+        Checkout <span class="btn-arrow" aria-hidden="true">→</span>
+      </button>
+
+      <div class="secure-checkout">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        Secure Checkout
+      </div>
+    </footer>
+  </aside>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <script src="assets/js/noir-shared.js"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/noir-api.js"></script>
+  <script src="assets/js/checkout-gate.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/noir-store.js"></script>
+  <script src="assets/js/noir-auth.js"></script>
+  <script src="assets/js/order-success-anim.js"></script>
+  <script src="assets/js/checkout.js"></script>
+
+</body>
+</html>

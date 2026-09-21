@@ -1,0 +1,9 @@
+{
+  "name": "noir-store",
+  "version": "2.3.4.0",
+  "private": true,
+  "description": "NOIR storefront: static website with Supabase as the backend.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Account | NOIR.</title>
+  <meta name="description" content="Your NOIR account.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/noir-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/store.css">
+  <link rel="stylesheet" href="assets/css/cart.css">
+  <link rel="stylesheet" href="assets/css/palette.css">
+  <link rel="stylesheet" href="assets/css/auth.css">
+  <link rel="stylesheet" href="assets/css/gate.css">
+</head>
+<body class="n-body n-account-page">
+  <div class="n-shell">
+    <a class="n-skip" href="#main">Skip to content</a>
+
+    <header class="n-header">
+      <div class="n-menu-scrim" id="menuScrim"></div>
+      <div class="n-wrap n-header__bar">
+        <a class="n-wordmark" href="index.html" aria-label="NOIR. home">NOIR.</a>
+
+        <nav class="n-nav" id="siteMenu" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="shop.html">Shop</a>
+          <a class="n-nav__mobile-only" href="wishlist.html">Wishlist</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a class="n-nav__mobile-only" href="account.html" aria-current="page">Account</a>
+        </nav>
+
+        <div class="n-actions">
+          <a class="n-icon-btn" href="shop.html?search=1" aria-label="Search the shop"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>
+          <a class="n-icon-btn n-desktop-only" href="wishlist.html" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n-badge" data-wish-count hidden>0</span></a>
+          <button class="n-icon-btn" id="cartBtn" type="button" aria-label="Open bag"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="n-badge" id="cartCount" hidden>0</span></button>
+          <a class="n-icon-btn n-desktop-only" href="account.html" aria-label="Account" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a>
+          <button class="n-icon-btn n-menu-btn" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteMenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i-open" d="M4 7h16M4 12h16M4 17h16"/><path class="i-close" d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="n-main au-main">
+
+      <!-- Guests: create an account / sign in -->
+      <section class="au" id="authView" aria-labelledby="auTitle" hidden>
+        <div class="au-deco" aria-hidden="true">
+          <svg class="au-deco__hills" viewBox="0 0 1200 240" preserveAspectRatio="none"><path d="M0 120C150 60 330 50 520 110s330 100 680 20V240H0z" fill="#efeae4"/><path d="M380 240C560 150 800 120 1200 170V240z" fill="#e7e1d9"/></svg>
+          <svg class="au-deco__leaf" viewBox="0 0 120 200"><path d="M110 8C60 22 22 64 20 132c-1 22 4 44 12 60 8-52 36-96 78-124z" fill="#8c877b" opacity=".75"/><path d="M118 70C86 84 62 110 52 152c26-8 52-40 66-82z" fill="#77725f" opacity=".7"/></svg>
+          <p class="au-deco__script">Good Choices<br>Brighter Days<span></span></p>
+        </div>
+
+        <div class="au-card">
+          <div class="au-top">
+            <button class="au-back" id="auBack" type="button" aria-label="Go back"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <p class="au-switch">
+              <span id="auSwitchLabel">Already have an account?</span>
+              <button type="button" id="auSwitchBtn"><span id="auSwitchText">Sign In</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+            </p>
+          </div>
+
+          <header class="au-head">
+            <h1 id="auTitle">Create Account</h1>
+            <p id="auSub">Join us and start your journey today.</p>
+          </header>
+
+          <ul class="au-perks" id="auPerks">
+            <li><span class="au-perk__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12a1 1 0 01-1 1H7a1 1 0 01-1-1L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg></span><strong>Shop</strong><small>your favorites</small></li>
+            <li><span class="au-perk__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span><strong>Save</strong><small>what you love</small></li>
+            <li><span class="au-perk__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7z"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></span><strong>Track</strong><small>your orders</small></li>
+          </ul>
+
+          <p class="au-alert" id="auAlert" role="alert" hidden></p>
+
+          <form class="au-form" id="auForm" novalidate>
+          <div class="au-field" data-modes="create" data-field="name">
+            <label class="au-box" for="auName">
+              <span class="au-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span>
+              <span class="au-sr">Full Name</span>
+              <input id="auName" name="name" type="text" placeholder="Full Name" autocomplete="name" >
+              
+            </label>
+            <p class="au-error" id="auNameError" role="alert"></p>
+          </div>
+          <div class="au-field" data-modes="create signin forgot" data-field="email">
+            <label class="au-box" for="auEmail">
+              <span class="au-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span>
+              <span class="au-sr">Email Address</span>
+              <input id="auEmail" name="email" type="email" placeholder="Email Address" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false">
+              
+            </label>
+            <p class="au-error" id="auEmailError" role="alert"></p>
+          </div>
+          <div class="au-field" data-modes="create signin reset" data-field="password">
+            <label class="au-box" for="auPassword">
+              <span class="au-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/><path d="M12 15v2"/></svg></span>
+              <span class="au-sr">Password</span>
+              <input id="auPassword" name="password" type="password" placeholder="Password" autocomplete="new-password" >
+              <button class="au-eye" type="button" data-toggle="auPassword" aria-label="Show password" aria-pressed="false"><span class="au-eye__on"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3l18 18"/><path d="M10.6 6.2A9.6 9.6 0 0112 6c6.4 0 10 6 10 6a17 17 0 01-3.3 3.9M6.6 7.6C3.9 9.3 2 12 2 12s3.6 6 10 6c1.5 0 2.9-.3 4.1-.8"/><path d="M9.9 9.9a3 3 0 004.2 4.2"/></svg></span><span class="au-eye__off" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span></button>
+            </label>
+            <p class="au-error" id="auPasswordError" role="alert"></p>
+          </div>
+          <div class="au-field" data-modes="create reset" data-field="confirm">
+            <label class="au-box" for="auConfirm">
+              <span class="au-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/><path d="M12 15v2"/></svg></span>
+              <span class="au-sr">Confirm Password</span>
+              <input id="auConfirm" name="confirm" type="password" placeholder="Confirm Password" autocomplete="new-password" >
+              <button class="au-eye" type="button" data-toggle="auConfirm" aria-label="Show password" aria-pressed="false"><span class="au-eye__on"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3l18 18"/><path d="M10.6 6.2A9.6 9.6 0 0112 6c6.4 0 10 6 10 6a17 17 0 01-3.3 3.9M6.6 7.6C3.9 9.3 2 12 2 12s3.6 6 10 6c1.5 0 2.9-.3 4.1-.8"/><path d="M9.9 9.9a3 3 0 004.2 4.2"/></svg></span><span class="au-eye__off" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span></button>
+            </label>
+            <p class="au-error" id="auConfirmError" role="alert"></p>
+          </div>
+
+            <p class="au-hint" data-modes="create reset">Use at least 8 characters.</p>
+            <p class="au-forgot" data-modes="signin"><button type="button" id="auForgotBtn">Forgot password?</button></p>
+
+            <div class="au-field au-terms" data-modes="create" data-field="terms">
+              <label class="au-check">
+                <input type="checkbox" id="auTerms" name="terms">
+                <span class="au-check__box" aria-hidden="true"></span>
+                <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></span>
+              </label>
+              <p class="au-error" id="auTermsError" role="alert"></p>
+            </div>
+
+            <button class="au-primary" id="auSubmit" type="submit"><span id="auSubmitText">Create Account</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+          </form>
+
+          <div class="au-sent" id="auSent" hidden>
+            <span class="au-sent__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span>
+            <h2 id="auSentTitle">Check your email</h2>
+            <p id="auSentText"></p>
+            <button class="au-primary" id="auSentBack" type="button"><span>Back to Sign In</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+          </div>
+
+          <div class="au-providers-wrap" id="auProviders">
+            <p class="au-or"><span>or continue with</span></p>
+            <div class="au-providers">
+              <button class="au-provider" id="auGoogle" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="au-google"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 01-2.4 3.7v3h3.9c2.3-2.1 3.5-5.2 3.5-8.9z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0012 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 010-4.6V6.6H1.3a12 12 0 000 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 001.3 6.6l4 3.1C6.2 6.9 8.9 4.8 12 4.8z"/></svg><span>Google</span><em hidden>Soon</em></button>
+              <button class="au-provider" id="auPhone" type="button" disabled aria-disabled="true" title="Phone sign-in is coming soon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg><span>Phone</span><em>Soon</em></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Signed in -->
+      <section class="ac" id="memberView" hidden>
+        <div class="ac-inner">
+
+          <!-- Account home -->
+          <div class="ac-screen" id="acHome">
+            <p class="ac-note" id="auMemberNote" role="status" hidden></p>
+
+            <header class="ac-profile">
+              <span class="ac-avatar" id="auAvatar" aria-hidden="true">N</span>
+              <div class="ac-who">
+                <h1 id="auHello">Hello</h1>
+                <p class="ac-mail" id="auMail"></p>
+                <p class="ac-quote">&ldquo;Better Choices, A Better You&rdquo;</p>
+              </div>
+              <a class="ac-gear" href="#settings" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></a>
+              <a class="ac-go" href="#settings" aria-label="Edit profile"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></a>
+            </header>
+
+            <ul class="ac-stats">
+              <li><a href="#orders"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12a1 1 0 01-1 1H7a1 1 0 01-1-1L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><strong id="acStatOrders">&ndash;</strong><span>Orders</span></a></li>
+              <li><a href="wishlist.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><strong id="acStatWishlist">0</strong><span>Wishlist</span></a></li>
+              <li><a href="#addresses"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><strong id="acStatAddresses">&ndash;</strong><span>Addresses</span></a></li>
+            </ul>
+
+            <section class="ac-hero">
+              <img src="assets/images/item9.webp" alt="" loading="lazy">
+              <div class="ac-hero__text">
+                <h2>Style Speaks<br>Your Story</h2>
+                <p>Update your profile and<br>get a more personalized experience.</p>
+                <a class="ac-hero__btn" href="#settings">Edit Profile <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+              </div>
+            </section>
+
+            <ul class="ac-menu">
+          <li><a class="ac-row" href="#orders"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span><span class="ac-row__txt"><strong>My Orders</strong><small>View your orders and buy again</small></span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li><a class="ac-row" href="wishlist.html"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span><span class="ac-row__txt"><strong>Wishlist</strong><small>Your saved items</small></span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li><a class="ac-row" href="#addresses"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="ac-row__txt"><strong>Addresses</strong><small>Manage your saved addresses</small></span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li class="is-soon"><span class="ac-row" aria-disabled="true"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg></span><span class="ac-row__txt"><strong>Payment Methods</strong><small>Cards, UPI and more</small></span><em>Soon</em></span></li>
+          <li class="is-soon"><span class="ac-row" aria-disabled="true"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 004 0"/></svg></span><span class="ac-row__txt"><strong>Notifications</strong><small>Stay updated with the latest</small></span><em>Soon</em></span></li>
+          <li><a class="ac-row" href="#settings"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></span><span class="ac-row__txt"><strong>Settings</strong><small>Account, privacy &amp; preferences</small></span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li><a class="ac-row" href="contact.html"><span class="ac-row__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 114.2 1.8c-.9.8-1.7 1.3-1.7 2.7M12 17.2v.1"/></svg></span><span class="ac-row__txt"><strong>Help &amp; Support</strong><small>We&rsquo;re here to help</small></span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></a></li>
+            </ul>
+
+            <button class="ac-signout" id="auSignOut" type="button">Sign out</button>
+          </div>
+
+          <!-- My Orders -->
+          <div class="ac-screen" id="acOrdersScreen" hidden>
+            <div class="ac-bar"><a class="ac-back" href="#" aria-label="Back to account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></a><h2>My Orders</h2></div>
+            <p class="ac-alert" id="acOrdersAlert" role="alert" hidden></p>
+            <p class="ac-loading" id="acOrdersLoading">Loading your orders&hellip;</p>
+            <ul class="ac-orders" id="acOrdersList"></ul>
+            <div class="ac-empty" id="acOrdersEmpty" hidden>
+              <span class="ac-empty__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span>
+              <h3>No orders yet</h3>
+              <p>Orders you place while signed in will show up here.</p>
+              <a class="au-primary ac-cta" href="shop.html"><span>Start shopping</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Addresses -->
+          <div class="ac-screen" id="acAddressesScreen" hidden>
+            <div class="ac-bar"><a class="ac-back" href="#" aria-label="Back to account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></a><h2>Addresses</h2></div>
+            <p class="ac-alert" id="acAddrAlert" role="alert" hidden></p>
+            <p class="ac-loading" id="acAddrLoading">Loading your addresses&hellip;</p>
+            <ul class="ac-cards" id="acAddrList"></ul>
+            <div class="ac-empty" id="acAddrEmpty" hidden>
+              <span class="ac-empty__ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+              <h3>No saved addresses</h3>
+              <p>Save an address once and it is filled in for you at checkout.</p>
+            </div>
+            <button class="ac-add" id="acAddrAdd" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg><span>Add new address</span></button>
+
+            <form class="ac-form" id="acAddrForm" hidden novalidate>
+              <h3 id="acAddrFormTitle">New address</h3>
+            <div class="au-field" data-afield="acaLabel">
+              <label class="au-box" for="acaLabel"><span class="au-sr">Label (Home, Work…)</span>
+                <input id="acaLabel" type="text" placeholder="Label (Home, Work…)" autocomplete="off" maxlength="30">
+              </label>
+              <p class="au-error" id="acaLabelError" role="alert"></p>
+            </div>
+            <div class="au-field" data-afield="acaName">
+              <label class="au-box" for="acaName"><span class="au-sr">Full name</span>
+                <input id="acaName" type="text" placeholder="Full name" autocomplete="name" >
+              </label>
+              <p class="au-error" id="acaNameError" role="alert"></p>
+            </div>
+            <div class="au-field" data-afield="acaPhone">
+              <label class="au-box" for="acaPhone"><span class="au-sr">Phone number</span>
+                <input id="acaPhone" type="tel" placeholder="Phone number" autocomplete="tel" inputmode="tel">
+              </label>
+              <p class="au-error" id="acaPhoneError" role="alert"></p>
+            </div>
+            <div class="au-field" data-afield="acaAddress">
+              <label class="au-box" for="acaAddress"><span class="au-sr">Address (house / flat, street, area)</span>
+                <input id="acaAddress" type="text" placeholder="Address (house / flat, street, area)" autocomplete="street-address" >
+              </label>
+              <p class="au-error" id="acaAddressError" role="alert"></p>
+            </div>
+            <div class="au-field" data-afield="acaCity">
+              <label class="au-box" for="acaCity"><span class="au-sr">City</span>
+                <input id="acaCity" type="text" placeholder="City" autocomplete="address-level2" >
+              </label>
+              <p class="au-error" id="acaCityError" role="alert"></p>
+            </div>
+              <div class="au-field" data-afield="acaState">
+                <label class="au-box" for="acaState"><span class="au-sr">State</span>
+                  <select id="acaState" autocomplete="address-level1"><option value="">State</option></select>
+                </label>
+                <p class="au-error" id="acaStateError" role="alert"></p>
+              </div>
+            <div class="au-field" data-afield="acaPin">
+              <label class="au-box" for="acaPin"><span class="au-sr">PIN code</span>
+                <input id="acaPin" type="text" placeholder="PIN code" autocomplete="postal-code" inputmode="numeric" maxlength="6">
+              </label>
+              <p class="au-error" id="acaPinError" role="alert"></p>
+            </div>
+              <label class="au-check ac-default">
+                <input type="checkbox" id="acaDefault">
+                <span class="au-check__box" aria-hidden="true"></span>
+                <span>Use as my default address</span>
+              </label>
+              <div class="ac-form__actions">
+                <button class="au-primary" id="acAddrSave" type="submit"><span>Save address</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+                <button class="ac-ghost" id="acAddrCancel" type="button">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Settings -->
+          <div class="ac-screen" id="acSettingsScreen" hidden>
+            <div class="ac-bar"><a class="ac-back" href="#" aria-label="Back to account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></a><h2>Settings</h2></div>
+            <p class="ac-alert" id="acSetAlert" role="alert" hidden></p>
+
+            <form class="ac-form" id="acNameForm" novalidate>
+              <h3>Profile</h3>
+            <div class="au-field" data-afield="acsName">
+              <label class="au-box" for="acsName"><span class="au-sr">Full name</span>
+                <input id="acsName" type="text" placeholder="Full name" autocomplete="name" >
+              </label>
+              <p class="au-error" id="acsNameError" role="alert"></p>
+            </div>
+              <p class="ac-fixed"><span>Email</span><strong id="acsEmail"></strong></p>
+              <button class="au-primary" type="submit"><span>Save changes</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+            </form>
+
+            <form class="ac-form" id="acPwForm" novalidate>
+              <h3>Password</h3>
+            <div class="au-field" data-afield="acsPw">
+              <label class="au-box" for="acsPw"><span class="au-sr">New password</span>
+                <input id="acsPw" type="password" placeholder="New password" autocomplete="new-password" >
+              </label>
+              <p class="au-error" id="acsPwError" role="alert"></p>
+            </div>
+            <div class="au-field" data-afield="acsPw2">
+              <label class="au-box" for="acsPw2"><span class="au-sr">Confirm new password</span>
+                <input id="acsPw2" type="password" placeholder="Confirm new password" autocomplete="new-password" >
+              </label>
+              <p class="au-error" id="acsPw2Error" role="alert"></p>
+            </div>
+              <p class="au-hint">Use at least 8 characters.</p>
+              <button class="au-primary" type="submit"><span>Update password</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+            </form>
+
+            <section class="ac-form">
+              <h3>Account</h3>
+              <p class="ac-fixed ac-fixed--text">To delete your account or ask for a copy of your data, <a href="contact.html">contact us</a>.</p>
+              <button class="ac-signout" id="acsSignOut" type="button">Sign out</button>
+            </section>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+
+    <nav class="n-tabbar" aria-label="Primary">
+      <ul>
+        <li><a class="n-tab" href="index.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="fillable" d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="n-tab__label">Home</span></a></li>
+        <li><a class="n-tab" href="shop.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="fillable" d="M5 8h14l-1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span class="n-tab__label">Shop</span></a></li>
+        <li><a class="n-tab" href="wishlist.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="fillable" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n-badge" data-wish-count hidden>0</span></span><span class="n-tab__label">Wishlist</span></a></li>
+        <li><a class="n-tab" href="account.html" aria-current="page"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="fillable" cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span><span class="n-tab__label">Account</span></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- JS -->
+    <!-- CART SIDEBAR (opens from the bag icon on every page) -->
+  <aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <header class="cart-header">
+      <div class="cart-header-copy">
+        <h2 id="cartTitle">Your Cart</h2>
+        <span id="cartItemCount">0 items</span>
+      </div>
+      <button id="closeCart" class="close-cart-btn" type="button" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <footer class="cart-summary-box">
+      <details class="coupon-toggle" id="couponToggle">
+        <summary>
+          <span>Have a coupon code?</span>
+          <svg class="coupon-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="coupon-box">
+          <input id="couponInput" type="text" placeholder="Enter coupon code" aria-label="Coupon code" autocomplete="off" autocapitalize="characters" />
+          <button id="couponApplyBtn" type="button">Apply</button>
+        </div>
+        <p id="couponMessage" class="coupon-message" aria-live="polite"></p>
+      </details>
+
+      <div class="summary-lines">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+
+        <div class="summary-row shipping-row">
+          <span>Shipping</span>
+          <span id="cartShipping">Free</span>
+        </div>
+
+        <div class="summary-row discount-row" id="discountRow" hidden>
+          <span>Discount</span>
+          <span id="cartDiscount">₹0</span>
+        </div>
+      </div>
+
+      <div class="summary-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+
+      <button class="checkout-btn" id="checkoutBtn" type="button" aria-label="Go to checkout">
+        Checkout <span class="btn-arrow" aria-hidden="true">→</span>
+      </button>
+
+      <div class="secure-checkout">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        Secure Checkout
+      </div>
+    </footer>
+  </aside>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <script src="assets/js/noir-shared.js"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/noir-api.js"></script>
+  <script src="assets/js/checkout-gate.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/noir-store.js"></script>
+  <script src="assets/js/noir-auth.js"></script>
+  <script src="assets/js/account.js"></script>
+</body>
+</html>

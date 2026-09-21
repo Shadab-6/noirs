@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Product | NOIR.</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/noir-favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/store.css">
+  <link rel="stylesheet" href="assets/css/product.css">
+  <link rel="stylesheet" href="assets/css/cart.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/palette.css">
+
+  <link rel="stylesheet" href="assets/css/gate.css">
+</head>
+
+<body class="n-legacy">
+
+  <!-- NAVBAR -->
+  <div class="n-chrome">
+    <header class="n-header">
+      <div class="n-menu-scrim" id="menuScrim"></div>
+      <div class="n-wrap n-header__bar">
+        <a class="n-wordmark" href="index.html" aria-label="NOIR. home">NOIR.</a>
+
+        <nav class="n-nav" id="siteMenu" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="shop.html" aria-current="page">Shop</a>
+          <a class="n-nav__mobile-only" href="wishlist.html">Wishlist</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a class="n-nav__mobile-only" href="account.html">Account</a>
+        </nav>
+
+        <div class="n-actions">
+          <a class="n-icon-btn" href="shop.html?search=1" aria-label="Search the shop"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>
+          <a class="n-icon-btn n-desktop-only" href="wishlist.html" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n-badge" data-wish-count hidden>0</span></a>
+          <button class="n-icon-btn" id="cartBtn" type="button" aria-label="Open bag"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="n-badge" id="cartCount" hidden>0</span></button>
+          <a class="n-icon-btn n-desktop-only" href="account.html" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a>
+          <button class="n-icon-btn n-menu-btn" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteMenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i-open" d="M4 7h16M4 12h16M4 17h16"/><path class="i-close" d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- PRODUCT -->
+  <section class="product-page pd-page">
+
+    <div class="container">
+
+      <nav class="pd-breadcrumb" id="pdBreadcrumb" aria-label="Breadcrumb"></nav>
+
+      <div class="product-wrapper" id="productWrapper">
+
+      </div>
+
+      <section class="pd-related" id="pdRelated" aria-labelledby="pdRelatedTitle" hidden></section>
+
+    </div>
+
+    <div class="pd-sticky" id="pdStickyBar" aria-hidden="true"></div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <div class="n-chrome">
+    <footer class="n-footer">
+      <div class="n-wrap n-footer__inner">
+        <a class="n-wordmark n-footer__mark" href="index.html" aria-label="NOIR. home">NOIR.</a>
+        <p class="n-footer__tagline">Minimal today. A better you tomorrow.</p>
+
+        <ul class="n-social" aria-label="Follow NOIR.">
+          <li><a class="n-social__link" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="dot" cx="17.2" cy="6.8" r="0.9"/></svg></a></li>
+          <li><a class="n-social__link" href="#" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="solid" d="M17.8 3.5h2.9l-6.3 7.2 7.4 9.8h-5.8l-4.5-6-5.2 6H3.4l6.7-7.7L3 3.5h5.9l4.1 5.4 4.8-5.4zm-1 15.3h1.6L7.3 5.1H5.6l11.2 13.7z"/></svg></a></li>
+          <li><a class="n-social__link" href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="solid" d="M10 9.2v5.6l4.8-2.8z"/></svg></a></li>
+          <li><a class="n-social__link" href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M11 17.5l1.4-6.2M9.2 11c0-1.6 1.3-2.6 2.8-2.6 1.7 0 2.8 1.1 2.8 2.7 0 1.9-1.2 3.3-2.7 3.3-.8 0-1.4-.4-1.6-1"/></svg></a></li>
+        </ul>
+
+        <nav class="n-footer__links" aria-label="Footer">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+          <a href="account.html">Account</a>
+        </nav>
+
+        <p class="n-footer__legal">&copy; 2026 NOIR. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <nav class="n-tabbar" aria-label="Primary">
+      <ul>
+        <li><a class="n-tab" href="index.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="fillable" d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="n-tab__label">Home</span></a></li>
+        <li><a class="n-tab" href="shop.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="fillable" d="M5 8h14l-1 12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span class="n-tab__label">Shop</span></a></li>
+        <li><a class="n-tab" href="wishlist.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="fillable" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n-badge" data-wish-count hidden>0</span></span><span class="n-tab__label">Wishlist</span></a></li>
+        <li><a class="n-tab" href="account.html"><span class="n-tab__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="fillable" cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span><span class="n-tab__label">Account</span></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- CART -->
+
+  <!-- JS -->
+      <!-- CART SIDEBAR (opens from the bag icon on every page) -->
+  <aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <header class="cart-header">
+      <div class="cart-header-copy">
+        <h2 id="cartTitle">Your Cart</h2>
+        <span id="cartItemCount">0 items</span>
+      </div>
+      <button id="closeCart" class="close-cart-btn" type="button" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <footer class="cart-summary-box">
+      <details class="coupon-toggle" id="couponToggle">
+        <summary>
+          <span>Have a coupon code?</span>
+          <svg class="coupon-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="coupon-box">
+          <input id="couponInput" type="text" placeholder="Enter coupon code" aria-label="Coupon code" autocomplete="off" autocapitalize="characters" />
+          <button id="couponApplyBtn" type="button">Apply</button>
+        </div>
+        <p id="couponMessage" class="coupon-message" aria-live="polite"></p>
+      </details>
+
+      <div class="summary-lines">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+
+        <div class="summary-row shipping-row">
+          <span>Shipping</span>
+          <span id="cartShipping">Free</span>
+        </div>
+
+        <div class="summary-row discount-row" id="discountRow" hidden>
+          <span>Discount</span>
+          <span id="cartDiscount">₹0</span>
+        </div>
+      </div>
+
+      <div class="summary-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+
+      <button class="checkout-btn" id="checkoutBtn" type="button" aria-label="Go to checkout">
+        Checkout <span class="btn-arrow" aria-hidden="true">→</span>
+      </button>
+
+      <div class="secure-checkout">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        Secure Checkout
+      </div>
+    </footer>
+  </aside>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <script src="assets/js/noir-shared.js"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/noir-api.js"></script>
+  <script src="assets/js/noir-auth.js"></script>
+  <script src="assets/js/checkout-gate.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/noir-store.js"></script>
+  <script src="assets/js/product.js"></script>
+
+</body>
+</html>

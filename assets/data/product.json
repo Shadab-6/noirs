@@ -1,0 +1,312 @@
+[
+  {
+    "id": 1,
+    "name": "Minimal Black Hoodie",
+    "price": 2999,
+    "oldPrice": 4999,
+    "category": "hoodie",
+    "genders": [
+      "men"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item1.png"
+  },
+  {
+    "id": 2,
+    "name": "luxury jersey",
+    "price": 5999,
+    "oldPrice": 8999,
+    "category": "jersey",
+    "genders": [
+      "men"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item2.png"
+  },
+  {
+    "id": 3,
+    "name": "Premium Grey jersey",
+    "price": 7999,
+    "oldPrice": 11999,
+    "category": "jersey",
+    "genders": [
+      "men"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": false,
+    "popular": true,
+    "image": "assets/images/item3.png"
+  },
+  {
+    "id": 4,
+    "name": "classic jersey",
+    "price": 6499,
+    "oldPrice": 9999,
+    "category": "jersey",
+    "genders": [
+      "men"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item4.png"
+  },
+  {
+    "id": 7,
+    "name": "Forest Green Hoodie",
+    "price": 2499,
+    "oldPrice": 8799,
+    "category": "hoodie",
+    "genders": [
+      "men"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item7.webp"
+  },
+  {
+    "id": 8,
+    "name": "Noir Black Hoodie",
+    "price": 2199,
+    "oldPrice": 8499,
+    "category": "hoodie",
+    "genders": [
+      "men",
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item8.webp"
+  },
+  {
+    "id": 9,
+    "name": "Taupe Bomber Jacket",
+    "price": 3299,
+    "oldPrice": 9299,
+    "category": "jacket",
+    "genders": [
+      "men",
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item9.webp"
+  },
+  {
+    "id": 10,
+    "name": "Black Bomber Jacket",
+    "price": 3699,
+    "oldPrice": 9799,
+    "category": "jacket",
+    "genders": [
+      "men"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item10.webp"
+  },
+  {
+    "id": 11,
+    "name": "Heritage Court Sneaker",
+    "price": 4999,
+    "oldPrice": 9499,
+    "category": "shoes",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item11.webp"
+  },
+  {
+    "id": 12,
+    "name": "Classic Canvas Low-Top",
+    "price": 2799,
+    "oldPrice": 5499,
+    "category": "shoes",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item12.webp"
+  },
+  {
+    "id": 13,
+    "name": "Light Wash Wide-Leg Jeans",
+    "price": 3399,
+    "oldPrice": 7999,
+    "category": "bottoms",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item13.webp"
+  },
+  {
+    "id": 14,
+    "name": "Striped Half-Zip Sweater",
+    "price": 3899,
+    "oldPrice": 9199,
+    "category": "knitwear",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item14.webp"
+  },
+  {
+    "id": 15,
+    "name": "Pleated Wide-Leg Trousers",
+    "price": 3799,
+    "oldPrice": 8599,
+    "category": "bottoms",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item15.webp"
+  },
+  {
+    "id": 16,
+    "name": "Layered Collar Cardigan",
+    "price": 3999,
+    "oldPrice": 9599,
+    "category": "knitwear",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item16.webp"
+  },
+  {
+    "id": 17,
+    "name": "Wide-Leg Cargo Pants",
+    "price": 3599,
+    "oldPrice": 8899,
+    "category": "bottoms",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item17.webp"
+  },
+  {
+    "id": 18,
+    "name": "Bow Detail Flare-Sleeve Top",
+    "price": 3199,
+    "oldPrice": 8299,
+    "category": "tops",
+    "genders": [
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/item18.webp"
+  }
+]

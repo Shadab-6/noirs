@@ -1,6 +1,6 @@
 {
   "name": "noir-store",
-  "version": "2.3.4.3",
+  "version": "2.3.4.4",
   "private": true,
   "description": "NOIR storefront: static website with Supabase as the backend.",
   "scripts": {

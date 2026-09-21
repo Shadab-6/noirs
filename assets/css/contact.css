@@ -593,6 +593,23 @@
 }
 
 @media (max-width: 720px) {
+  /* Mobile performance: avoid expensive backdrop-filter compositing on multiple stacked surfaces.
+     Keep the glass look with translucent fills, borders and shadows instead. */
+  .contact-main::before,
+  .contact-main::after,
+  .contact-card,
+  .contact-form-box,
+  .contact-field {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .contact-main::before,
+  .contact-main::after {
+    filter: none;
+    opacity: 0.45;
+  }
+
   .contact-hero {
     padding-top: 38px !important;
   }

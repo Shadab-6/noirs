@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.4.4] - 2026-09-22
+
+- Fixed mobile Contact page jank by disabling expensive backdrop-filter compositing on stacked contact surfaces.
+- Preserved the Contact page glass appearance using translucent fills, borders, and shadows.
+- Kept the shared navigation bar and Supabase backend unchanged.
+
 ## [2.3.4.3] - 2026-09-22
 
 ### Maintenance

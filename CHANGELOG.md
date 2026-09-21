@@ -4,6 +4,15 @@ Versioning scheme: `MAJOR.MINOR.FEATURE.PATCH`
 
 ## [2.3.4.0] - 2026-09-22
 
+### UI
+- Redesigned the signed-in **My Orders** screen with a premium mobile-first layout inspired by the provided reference: refined order cards, status pills, tracking steps, filter tabs, order details, responsive action buttons, and a glass-style help control.
+- Kept the existing global glass bottom navigation unchanged.
+- No Supabase schema, data, permissions or functions were changed for this UI update.
+
+
+### Fixed
+- Coupon validation now works for signed-out shoppers: the `validate_coupon` RPC is callable by the anonymous browser role while the `coupons` table remains blocked from direct browser access. Coupon validation is still rate-limited and returns only the minimum discount information needed by the storefront.
+
 ### Security
 - Synced the repository migration history with the live Supabase security hardening.
 - Privileged order, coupon, account-order, cancellation and newsletter implementations live in the private schema; public RPCs are controlled `SECURITY DEFINER` wrappers with an empty `search_path`.

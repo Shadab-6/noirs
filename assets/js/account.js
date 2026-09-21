@@ -397,6 +397,176 @@
 
   /* ---- orders */
 
+  const orderFilterState = { active: "all" };
+  const ORDER_STEPS = ["placed", "processing", "shipped", "delivered"];
+  const TRACK_ICONS = {
+    placed: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12a1 1 0 01-1 1H7a1 1 0 01-1-1L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>',
+    processing: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 1.5"/></svg>',
+    shipped: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7z"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>',
+    delivered: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4.5 4.5L19 7"/></svg>'
+  };
+
+  function orderStatusIndex(status) {
+    const normalized = String(status || "pending").toLowerCase();
+    if (normalized === "cancelled") return -1;
+    if (normalized === "delivered") return 3;
+    if (normalized === "shipped") return 2;
+    if (normalized === "processing" || normalized === "confirmed") return 1;
+    return 0;
+  }
+
+  function orderStatusLabel(status) {
+    const normalized = String(status || "pending").toLowerCase();
+    if (normalized === "confirmed") return "Processing";
+    return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+  }
+
+  function renderTrack(order) {
+    let normalized = String(order.status || "pending").toLowerCase();
+    // The backend uses pending until the admin confirms the order.
+    // In the customer-facing timeline that lifecycle stage is shown as Processing.
+    if (normalized === "pending" || normalized === "confirmed") normalized = "processing";
+
+    if (normalized === "cancelled") {
+      return `
+        <div class="ac-order__track ac-order__track--cancelled">
+          <div class="ac-track ac-track--cancelled" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+            <div class="ac-track__step is-done">${trackDot("placed", true)}<span class="ac-track__label">Order Placed</span></div>
+            <div class="ac-track__step is-current">${trackDot("delivered", false)}<span class="ac-track__label">Cancelled</span></div>
+          </div>
+        </div>`;
+    }
+
+    const current = orderStatusIndex(normalized);
+    const labels = ["Order Placed", "Processing", "Shipped", "Delivered"];
+    const progress = `${Math.max(0, Math.min(100, (current / 3) * 100))}%`;
+    return `
+      <div class="ac-order__track" style="--track-progress:${progress}">
+        <div class="ac-track" data-current="${current}">
+          ${labels.map((label, index) => {
+            const state = index < current ? "is-done" : index === current ? "is-current" : "";
+            return `<div class="ac-track__step ${state}">${trackDot(ORDER_STEPS[index], index < current)}<span class="ac-track__label">${label}</span></div>`;
+          }).join("")}
+        </div>
+      </div>`;
+  }
+
+  function trackDot(type, done) {
+    return `<span class="ac-track__dot">${done ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4.5 4.5L19 7"/></svg>' : TRACK_ICONS[type]}</span>`;
+  }
+
+  function formatAddress(address) {
+    if (!address) return "—";
+    const parts = [address.address, address.city, address.state, address.pin].filter(Boolean);
+    return parts.join(", ");
+  }
+
+  function renderOrderCard(order, index, productsById) {
+    const firstItem = order.items?.[0] || {};
+    const product = productsById.get(Number(firstItem.productId));
+    const image = product?.image || "";
+    const itemCount = Array.isArray(order.items) ? order.items.reduce((sum, item) => sum + Number(item.quantity || 0), 0) : 0;
+    const moreItems = Math.max(0, (order.items?.length || 0) - 1);
+    const status = String(order.status || "pending").toLowerCase();
+    const displayStatus = status === "pending" ? "processing" : status;
+    const statusLabel = orderStatusLabel(displayStatus);
+    const paymentStatus = String(order.payment?.status || "pending").toLowerCase();
+    const shippingMethod = order.shippingMethod?.label || "Standard delivery";
+    const address = formatAddress(order.shippingAddress);
+    const orderNumber = escapeHTML(order.orderNumber);
+
+    // The order list is intentionally compact. Actions are determined by the order lifecycle:
+    // processing/pending → cancel, shipped → track, delivered → buy again, cancelled → details only.
+    const primaryAction = status === "shipped"
+      ? `<button class="ac-pill ac-pill--light" type="button" data-track-order="${index}" aria-expanded="false">Track Order</button>`
+      : status === "delivered"
+        ? `<button class="ac-pill ac-pill--light" type="button" data-buy-again="${index}">Buy Again</button>`
+        : status === "pending" || status === "processing" || status === "confirmed"
+          ? `<button class="ac-pill ac-pill--cancel" type="button" data-cancel-order="${index}">Cancel Order</button>`
+          : "";
+
+    return `
+      <li class="ac-order ac-order--${escapeHTML(displayStatus)}" data-status="${escapeHTML(displayStatus)}">
+        <div class="ac-order__main">
+          <span class="ac-order__img">${image ? `<img src="${escapeHTML(image)}" alt="" loading="lazy" decoding="async">` : ""}</span>
+          <div class="ac-order__copy">
+            <div class="ac-order__line">
+              <span class="ac-status" data-status="${escapeHTML(displayStatus)}">${escapeHTML(statusLabel)}</span>
+              <time class="ac-order__date" datetime="${escapeHTML(order.createdAt || "")}">${formatDate(order.createdAt)}</time>
+            </div>
+            <span class="ac-order__no">#${orderNumber}</span>
+            <h3 class="ac-order__name">${escapeHTML(firstItem.name || "NOIR item")}</h3>
+            <p class="ac-order__meta">${firstItem.size ? `Size ${escapeHTML(firstItem.size)}` : "Size selected at checkout"}${firstItem.quantity ? ` · Qty ${Number(firstItem.quantity)}` : ""}${moreItems ? ` · +${moreItems} more` : ""}</p>
+          </div>
+          <div class="ac-order__summary">
+            <strong>${formatINR(order.total)}</strong>
+            <small>${itemCount} ${itemCount === 1 ? "item" : "items"}</small>
+          </div>
+        </div>
+
+        ${status === "processing" || status === "pending" || status === "confirmed"
+          ? renderTrack(order)
+          : status === "shipped"
+            ? renderTrack(order).replace('<div class="ac-order__track"', '<div class="ac-order__track" hidden')
+            : ""}
+
+        <div class="ac-order__details" id="acOrderDetails-${index}" hidden>
+          <div class="ac-order__detail"><small>Deliver to</small><span>${escapeHTML(address)}</span></div>
+          <div class="ac-order__detail"><small>Payment</small><span>${escapeHTML(paymentStatus)}</span></div>
+          <div class="ac-order__detail"><small>Shipping</small><span>${escapeHTML(shippingMethod)}</span></div>
+        </div>
+
+        <div class="ac-order__actions">
+          ${primaryAction}
+          <button class="ac-pill" type="button" data-order-details="${index}" aria-expanded="false" aria-controls="acOrderDetails-${index}">View Details <span aria-hidden="true">→</span></button>
+        </div>
+      </li>`;
+  }
+
+  function renderOrderList(products = []) {
+    const list = $("acOrdersList");
+    if (!list) return;
+
+    const productsById = new Map(products.map(product => [Number(product.id), product]));
+    const active = orderFilterState.active;
+    const orders = Array.isArray(state.orders) ? state.orders : [];
+    const visible = orders.map((order, index) => ({ order, index })).filter(({ order }) => {
+      const status = String(order.status || "pending").toLowerCase();
+      if (active === "all") return true;
+      if (active === "processing") return status === "pending" || status === "processing" || status === "confirmed";
+      return status === active;
+    });
+
+    list.innerHTML = visible.map(({ order, index }) => renderOrderCard(order, index, productsById)).join("");
+    $("acOrdersEmpty").hidden = orders.length !== 0 && visible.length !== 0;
+    if (orders.length !== 0 && visible.length === 0) {
+      $("acOrdersEmpty").hidden = false;
+      $("acOrdersEmpty").querySelector("h3").textContent = `No ${active === "all" ? "orders" : active} orders`;
+      $("acOrdersEmpty").querySelector("p").textContent = "Try another filter to view the rest of your orders.";
+      $("acOrdersEmpty").querySelector("a").hidden = true;
+    } else if (orders.length === 0) {
+      $("acOrdersEmpty").querySelector("h3").textContent = "No orders yet";
+      $("acOrdersEmpty").querySelector("p").textContent = "Orders you place while signed in will show up here.";
+      $("acOrdersEmpty").querySelector("a").hidden = false;
+    } else {
+      $("acOrdersEmpty").hidden = true;
+      $("acOrdersEmpty").querySelector("a").hidden = false;
+    }
+  }
+
+  function setupOrderFilters(products = []) {
+    const filters = $("acOrderFilters");
+    if (!filters || filters.dataset.bound) return;
+    filters.dataset.bound = "true";
+    filters.addEventListener("click", event => {
+      const button = event.target.closest("[data-order-filter]");
+      if (!button) return;
+      orderFilterState.active = button.dataset.orderFilter || "all";
+      filters.querySelectorAll("[data-order-filter]").forEach(item => item.setAttribute("aria-selected", String(item === button)));
+      renderOrderList(products);
+    });
+  }
+
   async function loadOrders() {
     const accessToken = await token();
     if (!accessToken) return;
@@ -416,41 +586,63 @@
 
     state.orders = result.orders;
     $("acStatOrders").textContent = String(result.orders.length);
-    const images = new Map(products.map(product => [Number(product.id), product.image]));
-
-    if (result.orders.length === 0) {
-      $("acOrdersEmpty").hidden = false;
-      return;
-    }
-
-    $("acOrdersList").innerHTML = result.orders.map((order, index) => `
-      <li class="ac-order">
-        <div class="ac-order__head">
-          <div><span class="ac-order__no">${escapeHTML(order.orderNumber)}</span><span class="ac-order__date">${formatDate(order.createdAt)}</span></div>
-          <span class="ac-status" data-status="${escapeHTML(order.status)}">${escapeHTML(order.status)}</span>
-        </div>
-        <ul class="ac-order__items">
-          ${order.items.map(item => `
-            <li>
-              <span class="ac-order__img">${images.get(Number(item.productId)) ? `<img src="${escapeHTML(images.get(Number(item.productId)))}" alt="" loading="lazy">` : ""}</span>
-              <span><strong>${escapeHTML(item.name)}</strong><small>Size ${escapeHTML(item.size)} · Qty ${item.quantity}</small></span>
-              <b>${formatINR(item.price * item.quantity)}</b>
-            </li>`).join("")}
-        </ul>
-        <div class="ac-order__foot">
-          <div class="ac-order__total"><small>Total · payment ${escapeHTML((order.payment && order.payment.status) || "pending")}</small><strong>${formatINR(order.total)}</strong></div>
-          ${order.status === "pending" && (!order.payment || order.payment.status === "pending")
-            ? `<button class="ac-pill ac-pill--cancel" type="button" data-cancel-order="${index}">Cancel order</button>`
-            : ""}
-        </div>
-      </li>`).join("");
+    setupOrderFilters(products);
+    renderOrderList(products);
   }
 
   $("acOrdersList").addEventListener("click", async event => {
-    const button = event.target.closest("[data-cancel-order]");
-    if (!button) return;
+    const detailsButton = event.target.closest("[data-order-details]");
+    if (detailsButton) {
+      const details = $("acOrderDetails-" + detailsButton.dataset.orderDetails);
+      if (!details) return;
+      const open = !details.hidden;
+      details.hidden = open;
+      detailsButton.setAttribute("aria-expanded", String(!open));
+      detailsButton.innerHTML = open ? 'View Details <span aria-hidden="true">→</span>' : 'Hide Details <span aria-hidden="true">↑</span>';
+      return;
+    }
 
-    const order = state.orders[Number(button.dataset.cancelOrder)];
+    const trackButton = event.target.closest("[data-track-order]");
+    if (trackButton) {
+      const card = trackButton.closest(".ac-order");
+      const track = card?.querySelector(".ac-order__track");
+      if (!track) return;
+      const hidden = track.hidden;
+      track.hidden = !hidden;
+      trackButton.setAttribute("aria-expanded", String(hidden));
+      trackButton.textContent = hidden ? "Hide Tracking" : "Track Order";
+      if (hidden) {
+        requestAnimationFrame(() => {
+          track.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          track.animate([{ opacity: .7, transform: "translateY(-3px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 320, easing: "cubic-bezier(.2,.8,.2,1)" });
+        });
+      }
+      return;
+    }
+
+    const buyAgainButton = event.target.closest("[data-buy-again]");
+    if (buyAgainButton) {
+      const order = state.orders[Number(buyAgainButton.dataset.buyAgain)];
+      if (!order?.items?.length || typeof window.addToCart !== "function") return;
+      const products = await NoirApi.getProducts().catch(() => []);
+      const byId = new Map(products.map(product => [Number(product.id), product]));
+      let added = 0;
+      order.items.forEach(item => {
+        const product = byId.get(Number(item.productId));
+        if (!product) return;
+        for (let qty = 0; qty < Math.min(Number(item.quantity) || 1, 20); qty += 1) {
+          window.addToCart({ ...product, selectedSize: item.size || "" });
+        }
+        added += 1;
+      });
+      if (added) NoirStore.showToast(`${added} ${added === 1 ? "item" : "items"} added to your bag`, { label: "View bag", onClick: () => window.openCart?.() });
+      return;
+    }
+
+    const cancelButton = event.target.closest("[data-cancel-order]");
+    if (!cancelButton) return;
+
+    const order = state.orders[Number(cancelButton.dataset.cancelOrder)];
     if (!order) return;
 
     if (!window.confirm(`Cancel order ${order.orderNumber}? It will be removed and this can't be undone.`)) return;
@@ -458,11 +650,11 @@
     const accessToken = await token();
     if (!accessToken) return;
 
-    button.disabled = true;
+    cancelButton.disabled = true;
     const result = await NoirApi.cancelOrder(accessToken, order.id);
 
     if (result.error) {
-      button.disabled = false;
+      cancelButton.disabled = false;
       memberAlert("acOrdersAlert", result.error);
       return;
     }

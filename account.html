@@ -196,8 +196,30 @@
           </div>
 
           <!-- My Orders -->
-          <div class="ac-screen" id="acOrdersScreen" hidden>
-            <div class="ac-bar"><a class="ac-back" href="#" aria-label="Back to account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></a><h2>My Orders</h2></div>
+          <div class="ac-screen ac-screen--orders" id="acOrdersScreen" hidden>
+            <header class="ac-orders__hero">
+              <div class="ac-orders__heading">
+                <a class="ac-back" href="#" aria-label="Back to account"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></a>
+                <div>
+                  <p class="ac-orders__eyebrow">YOUR NOIR ACCOUNT</p>
+                  <h2>My Orders</h2>
+                  <p>Track, return or buy again</p>
+                </div>
+              </div>
+              <a class="ac-help" href="contact.html" aria-label="Need help? Contact NOIR support">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 13v-1a8 8 0 0116 0v1"/><path d="M4 13a2 2 0 002 2h1v-5H6a2 2 0 00-2 2v1zM20 13a2 2 0 00-2-2h-1v5h1a2 2 0 002-2v-1z"/><path d="M9 18h3a3 3 0 003-3"/></svg>
+                <span>Need Help?</span>
+              </a>
+            </header>
+
+            <nav class="ac-order-filters" id="acOrderFilters" aria-label="Filter orders" role="tablist">
+              <button type="button" role="tab" aria-selected="true" data-order-filter="all">All Orders</button>
+              <button type="button" role="tab" aria-selected="false" data-order-filter="processing">Processing</button>
+              <button type="button" role="tab" aria-selected="false" data-order-filter="shipped">Shipped</button>
+              <button type="button" role="tab" aria-selected="false" data-order-filter="delivered">Delivered</button>
+              <button type="button" role="tab" aria-selected="false" data-order-filter="cancelled">Cancelled</button>
+            </nav>
+
             <p class="ac-alert" id="acOrdersAlert" role="alert" hidden></p>
             <p class="ac-loading" id="acOrdersLoading">Loading your orders&hellip;</p>
             <ul class="ac-orders" id="acOrdersList"></ul>

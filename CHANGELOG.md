@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.4.3] - 2026-09-22
+
+### Maintenance
+- Removed the Git metadata directory from the distribution archive; `.git` remains required in the local Git working copy and is not part of the application payload.
+- Removed unused legacy CSS files (`footer.css`, `navbar.css`) that were not referenced by any page or stylesheet.
+- Removed unused image assets (`noir-hero-banner.webp`, `noir-logo.webp`, `online-shopping.png`, `remove.png`) that had no project references.
+- Corrected the security changelog wording so the exposed RPC wrappers are documented as `SECURITY INVOKER` wrappers while privileged implementations remain `SECURITY DEFINER`.
+- Synchronized the project version across `package.json` and `VERSION`.
+
+### Verification
+- Automated test suite: 39/39 passing.
+
 ## [2.3.4.1] - 2026-09-22
 
 ### Changed
@@ -26,7 +38,7 @@ Versioning scheme: `MAJOR.MINOR.FEATURE.PATCH`
 
 ### Security
 - Synced the repository migration history with the live Supabase security hardening.
-- Privileged order, coupon, account-order, cancellation and newsletter implementations live in the private schema; public RPCs are controlled `SECURITY DEFINER` wrappers with an empty `search_path`.
+- Privileged order, coupon, account-order, cancellation and newsletter implementations live in the private schema; public RPCs are controlled `SECURITY INVOKER` wrappers with an empty `search_path`; the private implementations remain `SECURITY DEFINER`.
 - Restricted RPC execution to the roles required by each operation and blocked direct browser access to orders, order items, coupons, newsletter subscribers and rate-limit data.
 - Removed duplicate RLS policies and kept one ownership policy per action for saved addresses.
 - Kept catalogue and shipping-method reads limited to active rows; browser writes remain blocked.

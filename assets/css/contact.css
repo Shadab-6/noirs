@@ -529,6 +529,11 @@
   transform: translateY(1px) scale(0.995);
 }
 
+.contact-submit > span:not(.contact-submit__icon),
+.contact-submit__icon {
+  color: #fff !important;
+}
+
 .contact-submit__icon {
   display: grid;
   place-items: center;
@@ -537,6 +542,7 @@
 .contact-submit__icon svg {
   width: 18px;
   height: 18px;
+  stroke: #fff !important;
 }
 
 .contact-form__footer {

@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.4.5] - 2026-09-22
+
+### Fixed
+- Fixed the Contact page “Send on WhatsApp” button text and icon contrast so both remain white on the dark button background.
+- Supabase/backend unchanged.
+
+### Verification
+- Automated test suite: 39/39 passing.
+
 ## [2.3.4.4] - 2026-09-22
 
 - Fixed mobile Contact page jank by disabling expensive backdrop-filter compositing on stacked contact surfaces.

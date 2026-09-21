@@ -1,33 +1,55 @@
 const whatsappForm = document.getElementById("whatsappForm");
+const messageField = document.getElementById("message");
+const messageCount = document.getElementById("messageCount");
+const formError = document.getElementById("contactFormError");
 
-whatsappForm.addEventListener("submit", function(e){
+if (whatsappForm) {
+  const updateCount = () => {
+    if (messageCount && messageField) messageCount.textContent = String(messageField.value.length);
+  };
 
-  e.preventDefault();
+  messageField?.addEventListener("input", updateCount);
+  updateCount();
 
-  const name = document.getElementById("name").value;
+  whatsappForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const email = document.getElementById("email").value;
+    if (formError) {
+      formError.hidden = true;
+      formError.textContent = "";
+    }
 
-  const subject = document.getElementById("subject").value;
+    if (!whatsappForm.checkValidity()) {
+      const firstInvalid = whatsappForm.querySelector(":invalid");
+      if (firstInvalid) firstInvalid.focus({ preventScroll: false });
+      return;
+    }
 
-  const message = document.getElementById("message").value;
+    const name = document.getElementById("name")?.value.trim() || "";
+    const email = document.getElementById("email")?.value.trim() || "";
+    const phone = document.getElementById("phone")?.value.trim() || "";
+    const subject = document.getElementById("subject")?.value || "";
+    const message = document.getElementById("message")?.value.trim() || "";
 
-  const whatsappNumber = "919136579741";
+    const whatsappNumber = "919136579741";
+    const finalMessage = [
+      "Hello NOIR.",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      phone ? `Phone: ${phone}` : null,
+      `Subject: ${subject}`,
+      "",
+      "Message:",
+      message
+    ].filter(Boolean).join("\n");
 
-  const finalMessage =
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(finalMessage)}`;
+    const popup = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-`Hello NOIR.%0A%0A
-Name: ${name}%0A
-Email: ${email}%0A
-Subject: ${subject}%0A%0A
-Message:%0A${message}`;
-
-  window.open(
-
-    `https://wa.me/${whatsappNumber}?text=${finalMessage}`,
-
-    "_blank"
-
-  );
-
-});
+    if (!popup && formError) {
+      formError.textContent = "Your browser blocked the WhatsApp window. Please allow pop-ups and try again.";
+      formError.hidden = false;
+    }
+  });
+}

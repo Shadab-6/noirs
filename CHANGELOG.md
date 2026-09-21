@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.3.4.1] - 2026-09-22
+
+### Changed
+- Redesigned the Contact page with a premium light glassmorphism layout: editorial hero, glass contact cards, refined message form, rounded fields, and responsive spacing.
+- Added an explicit Privacy Policy + Terms & Conditions consent checkbox with a visual check mark before sending a message.
+- Improved the WhatsApp contact form to include optional phone details, subject selection, client-side validation, and a live message character counter.
+- Kept the existing shared NOIR header, bottom navigation bar, footer, Supabase integration, and backend unchanged.
+
+### Maintenance
+- Synchronized the project version across `package.json` and `VERSION`.
+
 Versioning scheme: `MAJOR.MINOR.FEATURE.PATCH`
 
 ## [2.3.4.0] - 2026-09-22

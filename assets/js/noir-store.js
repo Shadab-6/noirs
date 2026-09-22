@@ -19,7 +19,7 @@
   "use strict";
 
   const WISHLIST_KEY = "noirWishlist";
-  const CATEGORY_LABELS = { hoodie: "Hoodies", jacket: "Jackets", jersey: "Jersey", bottoms: "Bottoms", knitwear: "Knitwear", tops: "Tops", shoes: "Shoes" };
+  const CATEGORY_LABELS = { hoodie: "Hoodies", jacket: "Jackets", sweatshirt: "Sweatshirts", bottoms: "Bottoms", knitwear: "Knitwear", tops: "Tops", shoes: "Shoes" };
   const TOAST_MS = 3800;
 
   // Fallback copy of the wishlist for when localStorage is unavailable.

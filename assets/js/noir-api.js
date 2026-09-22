@@ -6,7 +6,7 @@
  *   NoirApi.validateCoupon(c, s)   checks a coupon against the database
  *   NoirApi.createOrder(payload, token)   places an order (prices are recalculated server-side); token = signed-in customer, optional
  *   NoirApi.getMyOrders(token)     the signed-in customer's orders
- *   NoirApi.cancelOrder(token, id) cancels (removes) one of their pending orders
+ *   NoirApi.cancelOrder(token, id) cancels one of their pending orders and keeps the order in history
  *   NoirApi.listAddresses / saveAddress / deleteAddress (token, ...)   the customer's saved addresses
  *   NoirApi.subscribeNewsletter(e) saves a newsletter sign-up
  *
@@ -23,6 +23,16 @@
   const PRODUCT_SELECT = "id,name,price,oldPrice:old_price,category,genders,sizes,sale,popular,image";
   const SHIPPING_SELECT = "id,label,eta,minDays:min_days,maxDays:max_days,fee,freeFrom:free_from";
   const LOCAL_PRODUCTS_URL = "assets/data/product.json";
+  const CURRENT_SWEATSHIRT_IDS = new Set([23, 24, 25]);
+  // Frontend replacement rows for legacy product IDs 1–4. The live database
+  // may still contain archived versions of these IDs, so the storefront
+  // intentionally uses these code-owned rows and image paths instead.
+  const LEGACY_REPLACEMENTS = [
+    { id: 1, name: "Sage Curve Sweatshirt", price: 2999, oldPrice: 6999, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item1(1).png" },
+    { id: 2, name: "Ivory Panel Sweatshirt", price: 2499, oldPrice: 7499, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item2(1).png" },
+    { id: 3, name: "Graphite Panel Sweatshirt", price: 3499, oldPrice: 7999, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item3(1).png" },
+    { id: 4, name: "Mocha Curve Sweatshirt", price: 1999, oldPrice: 8999, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item4(1).png" }
+  ];
 
   let productsPromise = null;
   let shippingPromise = null;
@@ -80,12 +90,37 @@
     return response.json();
   }
 
+  async function mergeCurrentCollection(rows) {
+    const apiRows = Array.isArray(rows) ? rows : [];
+    const merged = new Map(apiRows.map(product => [Number(product.id), product]));
+
+    // Always replace the four legacy storefront rows with the new sweatshirt
+    // catalogue owned by the frontend code. This works even when those IDs
+    // remain archived in Supabase, so no backend migration is required.
+    for (const product of LEGACY_REPLACEMENTS) {
+      merged.set(Number(product.id), product);
+    }
+
+    try {
+      const localRows = await loadLocalProducts();
+      const localCurrent = localRows.filter(product => CURRENT_SWEATSHIRT_IDS.has(Number(product.id)));
+      for (const product of localCurrent) {
+        const id = Number(product.id);
+        if (!merged.has(id)) merged.set(id, product);
+      }
+    } catch (error) {
+      console.warn("NOIR: local sweatshirt fallback could not be loaded.", error.message);
+    }
+
+    return [...merged.values()].sort((a, b) => Number(a.id) - Number(b.id));
+  }
+
   function getProducts() {
     if (!productsPromise) {
-      productsPromise = request(`/rest/v1/products?select=${PRODUCT_SELECT}&order=id.asc`)
+      productsPromise = request(`/rest/v1/products?select=${PRODUCT_SELECT}&is_active=eq.true&order=id.asc`)
         .then(rows => {
           if (!Array.isArray(rows) || rows.length === 0) throw new Error("No products returned");
-          return rows;
+          return mergeCurrentCollection(rows);
         })
         .catch(error => {
           console.warn("NOIR: using the built-in product list because the catalogue could not be loaded.", error.message);

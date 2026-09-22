@@ -7,7 +7,6 @@
 
 body,
 .hero,
-.about-hero,
 .shop-hero,
 .contact-hero,
 .product-page {
@@ -22,8 +21,6 @@ body,
 .cart-footer,
 .product-card,
 .newsletter-box,
-.stat-box,
-.team-card,
 .info-box,
 .contact-form-box,
 .filters-wrapper input,
@@ -34,22 +31,22 @@ body,
   color: var(--noir-ink) !important;
 }
 
-/* .pd-page (product detail), .co-page (checkout) and .n-shell (home, shop, wishlist, account) and .n-chrome (the shared header, footer and tab bar on About, Contact and Cart) manage their own text, button and field colours. */
-body :is(p, h1, h2, h3, h4, h5, h6, a, span, label):not(:where(.pd-page, .pd-page *, .co-page, .co-page *, .n-shell, .n-shell *, .n-chrome, .n-chrome *, .gate-layer, .gate-layer *)) {
+/* .pd-page (product detail), .co-page (checkout), .ab-page (about) and .n-shell (home, shop, wishlist, account) and .n-chrome (the shared header, footer and tab bar on About, Contact and Cart) manage their own text, button and field colours. */
+body :is(p, h1, h2, h3, h4, h5, h6, a, span, label):not(:where(.pd-page, .pd-page *, .co-page, .co-page *, .ab-page, .ab-page *, .n-shell, .n-shell *, .n-chrome, .n-chrome *, .gate-layer, .gate-layer *)) {
   color: var(--noir-ink) !important;
 }
 
-button:not(:where(.pd-page *, .co-page *, .n-shell *, .n-chrome *, .gate-layer *)),
-input:not(:where(.co-page *, .n-shell *, .n-chrome *)),
-textarea:not(:where(.co-page *, .n-shell *, .n-chrome *)),
-select:not(:where(.co-page *, .n-shell *, .n-chrome *)) {
+button:not(:where(.pd-page *, .co-page *, .ab-page *, .n-shell *, .n-chrome *, .gate-layer *)),
+input:not(:where(.co-page *, .ab-page *, .n-shell *, .n-chrome *)),
+textarea:not(:where(.co-page *, .ab-page *, .n-shell *, .n-chrome *)),
+select:not(:where(.co-page *, .ab-page *, .n-shell *, .n-chrome *)) {
   background: var(--noir-white) !important;
   color: var(--noir-ink) !important;
   border-color: var(--noir-accent) !important;
 }
 
-input:not(:where(.co-page *, .n-shell *, .n-chrome *))::placeholder,
-textarea:not(:where(.co-page *, .n-shell *, .n-chrome *))::placeholder {
+input:not(:where(.co-page *, .ab-page *, .n-shell *, .n-chrome *))::placeholder,
+textarea:not(:where(.co-page *, .ab-page *, .n-shell *, .n-chrome *))::placeholder {
   color: var(--noir-ink) !important;
   opacity: 0.7;
 }

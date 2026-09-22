@@ -18,11 +18,13 @@ function stubFetch(...replies) {
 
 test.beforeEach(() => NoirApi.resetCache());
 
-test("getProducts reads the products table with the publishable key", async () => {
-  const calls = stubFetch({ status: 200, body: [{ id: 1, name: "A", price: 100, oldPrice: 200 }] });
+test("getProducts reads the products table with the publishable key and overlays the four code-owned replacements", async () => {
+  const calls = stubFetch({ status: 200, body: [{ id: 1, name: "Legacy", price: 100, oldPrice: 200 }] }, new Error("local fallback not needed"));
   const products = await NoirApi.getProducts();
 
-  assert.equal(products.length, 1);
+  assert.equal(products.length, 4);
+  assert.deepEqual(products.map(product => product.id), [1, 2, 3, 4]);
+  assert.equal(products[0].name, "Sage Curve Sweatshirt");
   assert.match(calls[0].url, /^https:\/\/example\.supabase\.co\/rest\/v1\/products\?select=.*oldPrice:old_price/);
   assert.equal(calls[0].options.headers.apikey, "sb_publishable_test");
   assert.equal(calls[0].options.headers.Authorization, undefined);

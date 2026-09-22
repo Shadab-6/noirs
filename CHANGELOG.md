@@ -1,4 +1,60 @@
+## 2.3.8.1
+
+- Added a database migration that retires duplicate active sweatshirt rows 19–22 while preserving their IDs for historical orders.
+- Retired duplicate sweatshirt rows 19–22 from the local storefront catalogue; IDs 1–4 remain the canonical four replacement cards, with 23–25 as the later additions.
+
+## 2.3.8.0
+
+- Audit fixes: synchronize the live catalogue with the storefront, keep cancelled orders in customer history, accept clothing and shoe sizes in order items, and escape backend-controlled product image URLs.
+- Reassert current Supabase RPC/RLS permissions in a canonical migration.
+
 # Changelog
+
+## 2.3.7.3 — Favicon update
+- Replaced the previous NOIR favicon with the supplied NOIR monogram artwork.
+- Updated all site pages to use the new PNG favicon.
+- Removed the unused previous SVG favicon asset.
+
+## 2.3.7.2
+
+- Added a new Forest Collared Half-Zip Sweatshirt to the storefront at ₹1,999 (MRP ₹3,999).
+- Added the optimized product image to the local catalogue and product fallback.
+- Extended the current sweatshirt fallback set so the new product loads even when it is not yet present in Supabase.
+
+## 2.3.7.1
+- Removed four duplicate sweatshirt WebP assets that duplicated the new uploaded sweatshirt images.
+- Kept the canonical uploaded filenames `item1(1).png` through `item4(1).png`.
+- Updated catalogue, product fallback, homepage reference, and local Supabase migration to use the single canonical assets.
+- Normalized live catalogue rows 19–22 in the frontend so stale duplicate WebP paths cannot produce broken images.
+
+## 2.3.7.0
+
+- Replaced product IDs 1–4 with the new four sweatshirt images while preserving the uploaded image filenames.
+- Added descriptive customer-facing sweatshirt names and randomized in-range sale pricing/MRPs.
+- Restored products 1–4 to the frontend catalogue without changing Supabase.
+- Updated product-page fallbacks and regression tests for the replacement catalogue.
+
+# Changelog
+
+## 2.3.6.0
+- Replaced the old first six catalogue products with a six-piece sweatshirt collection using the supplied product photography.
+- Set sweatshirt prices to ₹3,999 with MRP values from ₹6,999 to ₹7,999.
+- Added the `sweatshirt` collection filter and homepage collection tile.
+- Archived legacy product ids 1–6 in the Supabase migration instead of deleting them, preserving historical order references.
+
+## [2.3.5.0] - 2026-09-22
+
+### Changed
+- **About page rebuilt end-to-end** to match the supplied reference design: hero with a "Shop Now" CTA, a black stats bar (Happy Customers / Premium Products / Average Rating / Shipping), an "Our Story" section with a timeline (2024 / 2025 / Today), a "What We Stand For" values grid (4 icons), a full-bleed dark "Good Things Take Time." philosophy quote, a 3-panel editorial strip, a "Community" section with a photo/text mosaic, and a "Be Part of the Journey" newsletter panel wired to the real Supabase `subscribe_newsletter` function (same as the Home page form).
+- Removed the old fake "team" section, which reused product photos (item1/2/3) captioned as if they were staff portraits — replaced with the honest, typography-led sections above. No fabricated people or stock photography was used anywhere on the page.
+- Reused two existing real product photographs (`noir-hero-model.webp`, `noir-about-hero.webp`) for the hero and editorial strip; every other visual (hangtag, poster card, book/label panels, community tiles, stat/value icons) is hand-built with CSS/SVG — there is no AI image generation available in this environment, so nothing was fabricated to *look* like a photo.
+- `assets/css/about.css` rewritten from scratch, scoped under a new `.ab-page` wrapper class (mirrors the existing `.pd-page` / `.co-page` pattern) so the page can use its own dark and light sections without fighting `palette.css`'s global forced colors.
+- `palette.css`: added `.ab-page` to the existing opt-out list (text, buttons, inputs, placeholders) and removed now-dead legacy selectors (`.about-hero`, `.stat-box`, `.team-card`) that no longer match anything.
+
+### Verification
+- Automated test suite: 39/39 passing.
+- Checked in a headless browser at 1440px and 390px widths: no horizontal overflow, no console errors, on any page (Home, Shop, Product, Wishlist, Account, About, Contact, Checkout, Privacy, Terms).
+- Confirmed the About page newsletter form submits to the real `subscribe_newsletter` Supabase function (same backend call used on Home).
 
 ## [2.3.4.5] - 2026-09-22
 
@@ -411,3 +467,8 @@ Added: `assets/js/noir-api.js`, `assets/js/supabase-config.js`, `supabase/`, `te
 
 ## [1.0.0.0]
 - Baseline version received (package.json `1.0.0`).
+
+## 2.3.7.0
+- Renamed the six new sweatshirt display names to Item 1, Item 2, Item 3, Item 4, Item 20 and Item 21.
+- Fixed the homepage featured-product selection so the current sweatshirt collection is shown even when Supabase still contains stale legacy popular rows.
+- Added a local current-collection fallback when the Supabase catalogue is missing any of the six sweatshirt products.

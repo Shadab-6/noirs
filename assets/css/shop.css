@@ -117,3 +117,16 @@
 
   .n-tools { grid-template-columns: 260px 200px; }
 }
+
+
+/* Lightweight shop loading state: no fake product cards while the catalogue loads. */
+.n-shop-loading {
+  grid-column: 1 / -1;
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  color: var(--n-muted, #777);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

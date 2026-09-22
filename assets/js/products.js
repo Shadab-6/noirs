@@ -1,12 +1,22 @@
-// NOIR home page: "Best Sellers" (the first four products flagged `popular`) and the collection counts.
-// Cards, wishlist hearts and size quick-add come from noir-store.js.
+// NOIR home page: the current sweatshirt collection is the featured Best Sellers set.
+// We keep the older product IDs for order-history compatibility, but never let stale
+// catalogue rows push the current sweatshirt collection off the front page.
 (function () {
   const grid = document.getElementById("bestSellers");
   if (!grid) return;
 
   const BEST_SELLER_COUNT = 4;
+  const FEATURED_SWEATSHIRT_IDS = [19, 20, 21, 22, 23, 24];
 
   function pickBestSellers(products) {
+    const featured = products
+      .filter(product => FEATURED_SWEATSHIRT_IDS.includes(Number(product.id)))
+      .sort((a, b) => Number(a.id) - Number(b.id));
+
+    if (featured.length) {
+      return featured.slice(0, BEST_SELLER_COUNT);
+    }
+
     const popular = products.filter(product => product.popular);
     const rest = products.filter(product => !product.popular);
     return [...popular, ...rest].slice(0, BEST_SELLER_COUNT);
@@ -39,7 +49,9 @@
 
     NoirApi.getProducts()
       .then(products => {
-        NoirStore.renderGrid(grid, pickBestSellers(products));
+        const featured = pickBestSellers(products);
+        if (!featured.length) throw new Error("No featured products available");
+        NoirStore.renderGrid(grid, featured);
         showCollectionCounts(products);
       })
       .catch(error => {

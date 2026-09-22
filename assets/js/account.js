@@ -645,7 +645,7 @@
     const order = state.orders[Number(cancelButton.dataset.cancelOrder)];
     if (!order) return;
 
-    if (!window.confirm(`Cancel order ${order.orderNumber}? It will be removed and this can't be undone.`)) return;
+    if (!window.confirm(`Cancel order ${order.orderNumber}? This will mark the order as cancelled.`)) return;
 
     const accessToken = await token();
     if (!accessToken) return;
@@ -660,7 +660,7 @@
     }
 
     await loadOrders();
-    memberAlert("acOrdersAlert", `Order ${order.orderNumber} has been cancelled and removed.`, true);
+    memberAlert("acOrdersAlert", `Order ${order.orderNumber} has been cancelled.`, true);
   });
 
   /* ---- addresses */

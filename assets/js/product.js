@@ -1,187 +1,31 @@
 const fallbackProducts = [
-  {
-    id: 1,
-    name: "Minimal Black Hoodie",
-    price: 2999,
-    oldPrice: 4999,
-    category: "hoodie",
-    genders: ["men"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item1.png"
-  },
-  {
-    id: 2,
-    name: "luxury jersey",
-    price: 5999,
-    oldPrice: 8999,
-    category: "jersey",
-    genders: ["men"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item2.png"
-  },
-  {
-    id: 3,
-    name: "Premium Grey jersey",
-    price: 7999,
-    oldPrice: 11999,
-    category: "jersey",
-    genders: ["men"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: false,
-    image: "assets/images/item3.png"
-  },
-  {
-    id: 4,
-    name: "classic jersey",
-    price: 6499,
-    oldPrice: 9999,
-    category: "jersey",
-    genders: ["men"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item4.png"
-  },
-  {
-    id: 7,
-    name: "Forest Green Hoodie",
-    price: 2499,
-    oldPrice: 8799,
-    category: "hoodie",
-    genders: ["men"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item7.webp"
-  },
-  {
-    id: 8,
-    name: "Noir Black Hoodie",
-    price: 2199,
-    oldPrice: 8499,
-    category: "hoodie",
-    genders: ["men", "women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item8.webp"
-  },
-  {
-    id: 9,
-    name: "Taupe Bomber Jacket",
-    price: 3299,
-    oldPrice: 9299,
-    category: "jacket",
-    genders: ["men", "women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item9.webp"
-  },
-  {
-    id: 10,
-    name: "Black Bomber Jacket",
-    price: 3699,
-    oldPrice: 9799,
-    category: "jacket",
-    genders: ["men"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item10.webp"
-  },
-  {
-    id: 11,
-    name: "Heritage Court Sneaker",
-    price: 4999,
-    oldPrice: 9499,
-    category: "shoes",
-    genders: ["women"],
-    sizes: ["3", "4", "5", "6", "7", "8"],
-    sale: true,
-    image: "assets/images/item11.webp"
-  },
-  {
-    id: 12,
-    name: "Classic Canvas Low-Top",
-    price: 2799,
-    oldPrice: 5499,
-    category: "shoes",
-    genders: ["women"],
-    sizes: ["3", "4", "5", "6", "7", "8"],
-    sale: true,
-    image: "assets/images/item12.webp"
-  },
-  {
-    id: 13,
-    name: "Light Wash Wide-Leg Jeans",
-    price: 3399,
-    oldPrice: 7999,
-    category: "bottoms",
-    genders: ["women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item13.webp"
-  },
-  {
-    id: 14,
-    name: "Striped Half-Zip Sweater",
-    price: 3899,
-    oldPrice: 9199,
-    category: "knitwear",
-    genders: ["women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item14.webp"
-  },
-  {
-    id: 15,
-    name: "Pleated Wide-Leg Trousers",
-    price: 3799,
-    oldPrice: 8599,
-    category: "bottoms",
-    genders: ["women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item15.webp"
-  },
-  {
-    id: 16,
-    name: "Layered Collar Cardigan",
-    price: 3999,
-    oldPrice: 9599,
-    category: "knitwear",
-    genders: ["women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item16.webp"
-  },
-  {
-    id: 17,
-    name: "Wide-Leg Cargo Pants",
-    price: 3599,
-    oldPrice: 8899,
-    category: "bottoms",
-    genders: ["women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item17.webp"
-  },
-  {
-    id: 18,
-    name: "Bow Detail Flare-Sleeve Top",
-    price: 3199,
-    oldPrice: 8299,
-    category: "tops",
-    genders: ["women"],
-    sizes: ["S", "M", "L", "XL"],
-    sale: true,
-    image: "assets/images/item18.webp"
-  }
+  {"id":1,"name":"Sage Curve Sweatshirt","price":2999,"oldPrice":6999,"category":"sweatshirt","genders":["men","women"],"sizes":["S","M","L","XL"],"sale":true,"popular":true,"image":"assets/images/item1(1).png"},
+  {"id":2,"name":"Ivory Panel Sweatshirt","price":2499,"oldPrice":7499,"category":"sweatshirt","genders":["men","women"],"sizes":["S","M","L","XL"],"sale":true,"popular":true,"image":"assets/images/item2(1).png"},
+  {"id":3,"name":"Graphite Panel Sweatshirt","price":3499,"oldPrice":7999,"category":"sweatshirt","genders":["men","women"],"sizes":["S","M","L","XL"],"sale":true,"popular":true,"image":"assets/images/item3(1).png"},
+  {"id":4,"name":"Mocha Curve Sweatshirt","price":1999,"oldPrice":8999,"category":"sweatshirt","genders":["men","women"],"sizes":["S","M","L","XL"],"sale":true,"popular":true,"image":"assets/images/item4(1).png"},
+  {"id": 23, "name": "Urban Panel Sweatshirt", "price": 3999, "oldPrice": 7499, "category": "sweatshirt", "genders": ["men", "women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": true, "image": "assets/images/sweatshirt-urban-panel.webp"},
+  {"id": 24, "name": "Forest Collared Zip Sweatshirt", "price": 3999, "oldPrice": 7999, "category": "sweatshirt", "genders": ["men", "women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": true, "image": "assets/images/sweatshirt-collared-zip.webp"},
+  {"id": 25, "name": "Forest Collared Half-Zip Sweatshirt", "price": 1999, "oldPrice": 3999, "category": "sweatshirt", "genders": ["men", "women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/sweatshirt-forest-zip-collar.webp"},
+  {"id": 7, "name": "Forest Green Hoodie", "price": 2499, "oldPrice": 8799, "category": "hoodie", "genders": ["men"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": true, "image": "assets/images/item7.webp"},
+  {"id": 8, "name": "Noir Black Hoodie", "price": 2199, "oldPrice": 8499, "category": "hoodie", "genders": ["men", "women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": true, "image": "assets/images/item8.webp"},
+  {"id": 9, "name": "Taupe Bomber Jacket", "price": 3299, "oldPrice": 9299, "category": "jacket", "genders": ["men", "women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": true, "image": "assets/images/item9.webp"},
+  {"id": 10, "name": "Black Bomber Jacket", "price": 3699, "oldPrice": 9799, "category": "jacket", "genders": ["men"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": true, "image": "assets/images/item10.webp"},
+  {"id": 11, "name": "Heritage Court Sneaker", "price": 4999, "oldPrice": 9499, "category": "shoes", "genders": ["women"], "sizes": ["3", "4", "5", "6", "7", "8"], "sale": true, "popular": false, "image": "assets/images/item11.webp"},
+  {"id": 12, "name": "Classic Canvas Low-Top", "price": 2799, "oldPrice": 5499, "category": "shoes", "genders": ["women"], "sizes": ["3", "4", "5", "6", "7", "8"], "sale": true, "popular": false, "image": "assets/images/item12.webp"},
+  {"id": 13, "name": "Light Wash Wide-Leg Jeans", "price": 3399, "oldPrice": 7999, "category": "bottoms", "genders": ["women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/item13.webp"},
+  {"id": 14, "name": "Striped Half-Zip Sweater", "price": 3899, "oldPrice": 9199, "category": "knitwear", "genders": ["women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/item14.webp"},
+  {"id": 15, "name": "Pleated Wide-Leg Trousers", "price": 3799, "oldPrice": 8599, "category": "bottoms", "genders": ["women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/item15.webp"},
+  {"id": 16, "name": "Layered Collar Cardigan", "price": 3999, "oldPrice": 9599, "category": "knitwear", "genders": ["women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/item16.webp"},
+  {"id": 17, "name": "Wide-Leg Cargo Pants", "price": 3599, "oldPrice": 8899, "category": "bottoms", "genders": ["women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/item17.webp"},
+  {"id": 18, "name": "Bow Detail Flare-Sleeve Top", "price": 3199, "oldPrice": 8299, "category": "tops", "genders": ["women"], "sizes": ["S", "M", "L", "XL"], "sale": true, "popular": false, "image": "assets/images/item18.webp"},
 ];
+
 
 const productWrapper = document.getElementById("productWrapper");
 const breadcrumbEl = document.getElementById("pdBreadcrumb");
 const relatedEl = document.getElementById("pdRelated");
 const stickyBar = document.getElementById("pdStickyBar");
-const selectedProductId = Number(new URLSearchParams(window.location.search).get("id")) || 1;
+const selectedProductId = Number(new URLSearchParams(window.location.search).get("id")) || 19;
 
 const MAX_QTY = 10;
 const SIZES = ["S", "M", "L", "XL"];
@@ -266,7 +110,7 @@ function renderRelated(products, product) {
       ${related.map(item => `
         <a class="pd-related-card" href="product.html?id=${item.id}">
           <div class="pd-related-media">
-            <img src="${item.image}" alt="${escapeHTML(titleCase(item.name))}" loading="lazy">
+            <img src="${escapeHTML(item.image)}" alt="${escapeHTML(titleCase(item.name))}" loading="lazy">
           </div>
           <div class="pd-related-info">
             <h3>${escapeHTML(titleCase(item.name))}</h3>
@@ -315,7 +159,7 @@ function renderProduct(products) {
     <div class="pd-gallery">
       <div class="pd-media">
         <span class="pd-badge">${statusLabel}</span>
-        <img src="${product.image}" alt="${safeName}" fetchpriority="high">
+        <img src="${escapeHTML(product.image)}" alt="${safeName}" fetchpriority="high">
       </div>
     </div>
 

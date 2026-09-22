@@ -1,12 +1,13 @@
 [
   {
     "id": 1,
-    "name": "Minimal Black Hoodie",
+    "name": "Sage Curve Sweatshirt",
     "price": 2999,
-    "oldPrice": 4999,
-    "category": "hoodie",
+    "oldPrice": 6999,
+    "category": "sweatshirt",
     "genders": [
-      "men"
+      "men",
+      "women"
     ],
     "sizes": [
       "S",
@@ -16,16 +17,17 @@
     ],
     "sale": true,
     "popular": true,
-    "image": "assets/images/item1.png"
+    "image": "assets/images/item1(1).png"
   },
   {
     "id": 2,
-    "name": "luxury jersey",
-    "price": 5999,
-    "oldPrice": 8999,
-    "category": "jersey",
+    "name": "Ivory Panel Sweatshirt",
+    "price": 2499,
+    "oldPrice": 7499,
+    "category": "sweatshirt",
     "genders": [
-      "men"
+      "men",
+      "women"
     ],
     "sizes": [
       "S",
@@ -35,35 +37,17 @@
     ],
     "sale": true,
     "popular": true,
-    "image": "assets/images/item2.png"
+    "image": "assets/images/item2(1).png"
   },
   {
     "id": 3,
-    "name": "Premium Grey jersey",
-    "price": 7999,
-    "oldPrice": 11999,
-    "category": "jersey",
+    "name": "Graphite Panel Sweatshirt",
+    "price": 3499,
+    "oldPrice": 7999,
+    "category": "sweatshirt",
     "genders": [
-      "men"
-    ],
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "sale": false,
-    "popular": true,
-    "image": "assets/images/item3.png"
-  },
-  {
-    "id": 4,
-    "name": "classic jersey",
-    "price": 6499,
-    "oldPrice": 9999,
-    "category": "jersey",
-    "genders": [
-      "men"
+      "men",
+      "women"
     ],
     "sizes": [
       "S",
@@ -73,7 +57,87 @@
     ],
     "sale": true,
     "popular": true,
-    "image": "assets/images/item4.png"
+    "image": "assets/images/item3(1).png"
+  },
+  {
+    "id": 4,
+    "name": "Mocha Curve Sweatshirt",
+    "price": 1999,
+    "oldPrice": 8999,
+    "category": "sweatshirt",
+    "genders": [
+      "men",
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/item4(1).png"
+  },
+  {
+    "id": 23,
+    "name": "Urban Panel Sweatshirt",
+    "price": 3999,
+    "oldPrice": 7499,
+    "category": "sweatshirt",
+    "genders": [
+      "men",
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/sweatshirt-urban-panel.webp"
+  },
+  {
+    "id": 24,
+    "name": "Forest Collared Zip Sweatshirt",
+    "price": 3999,
+    "oldPrice": 7999,
+    "category": "sweatshirt",
+    "genders": [
+      "men",
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": true,
+    "image": "assets/images/sweatshirt-collared-zip.webp"
+  },
+  {
+    "id": 25,
+    "name": "Forest Collared Half-Zip Sweatshirt",
+    "price": 1999,
+    "oldPrice": 3999,
+    "category": "sweatshirt",
+    "genders": [
+      "men",
+      "women"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "sale": true,
+    "popular": false,
+    "image": "assets/images/sweatshirt-forest-zip-collar.webp"
   },
   {
     "id": 7,
@@ -82,7 +146,8 @@
     "oldPrice": 8799,
     "category": "hoodie",
     "genders": [
-      "men"
+      "men",
+      "women"
     ],
     "sizes": [
       "S",
@@ -141,7 +206,8 @@
     "oldPrice": 9799,
     "category": "jacket",
     "genders": [
-      "men"
+      "men",
+      "women"
     ],
     "sizes": [
       "S",

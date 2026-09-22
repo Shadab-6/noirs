@@ -128,11 +128,16 @@
     loadFailed = false;
     emptyEl.hidden = true;
     countEl.textContent = "Loading the collection";
-    NoirStore.renderSkeletons(grid, 8);
+    // Do not render the old blank skeleton cards on the shop page.
+    // They looked like broken product tiles on slower phones. Keep the grid
+    // empty while the real catalogue request is in flight instead.
+    grid.setAttribute("aria-busy", "true");
+    grid.innerHTML = `<div class="n-shop-loading" role="status">Loading collection…</div>`;
 
     NoirApi.getProducts()
       .then(data => {
         products = data;
+        grid.removeAttribute("aria-busy");
         update();
       })
       .catch(error => {

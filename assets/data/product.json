@@ -100,26 +100,6 @@
     "image": "assets/images/sweatshirt-urban-panel.webp"
   },
   {
-    "id": 24,
-    "name": "Forest Collared Zip Sweatshirt",
-    "price": 3999,
-    "oldPrice": 7999,
-    "category": "sweatshirt",
-    "genders": [
-      "men",
-      "women"
-    ],
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "sale": true,
-    "popular": true,
-    "image": "assets/images/sweatshirt-collared-zip.webp"
-  },
-  {
     "id": 25,
     "name": "Forest Collared Half-Zip Sweatshirt",
     "price": 1999,

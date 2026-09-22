@@ -6,20 +6,19 @@
   if (!grid) return;
 
   const BEST_SELLER_COUNT = 4;
-  const FEATURED_SWEATSHIRT_IDS = [19, 20, 21, 22, 23, 24];
+  const FEATURED_SWEATSHIRT_IDS = [19, 20, 21, 22, 23, 25];
 
   function pickBestSellers(products) {
     const featured = products
       .filter(product => FEATURED_SWEATSHIRT_IDS.includes(Number(product.id)))
       .sort((a, b) => Number(a.id) - Number(b.id));
 
-    if (featured.length) {
-      return featured.slice(0, BEST_SELLER_COUNT);
-    }
-
-    const popular = products.filter(product => product.popular);
-    const rest = products.filter(product => !product.popular);
-    return [...popular, ...rest].slice(0, BEST_SELLER_COUNT);
+    // Prefer the current sweatshirt set. If some historical IDs are inactive in
+    // Supabase, fill the remaining slots from active popular products so the
+    // home grid never collapses to only one or two cards.
+    const popular = products.filter(product => product.popular && !featured.some(item => item.id === product.id));
+    const rest = products.filter(product => !product.popular && !featured.some(item => item.id === product.id));
+    return [...featured, ...popular, ...rest].slice(0, BEST_SELLER_COUNT);
   }
 
   function showCollectionCounts(products) {

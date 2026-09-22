@@ -23,7 +23,7 @@
   const PRODUCT_SELECT = "id,name,price,oldPrice:old_price,category,genders,sizes,sale,popular,image";
   const SHIPPING_SELECT = "id,label,eta,minDays:min_days,maxDays:max_days,fee,freeFrom:free_from";
   const LOCAL_PRODUCTS_URL = "assets/data/product.json";
-  const CURRENT_SWEATSHIRT_IDS = new Set([23, 24, 25]);
+  const CURRENT_SWEATSHIRT_IDS = new Set([23, 25]);
   // Frontend replacement rows for legacy product IDs 1–4. The live database
   // may still contain archived versions of these IDs, so the storefront
   // intentionally uses these code-owned rows and image paths instead.

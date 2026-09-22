@@ -16,7 +16,7 @@ test("every product belongs to Men's, Women's or both, and has sizes", () => {
 
 test("Sweatshirts are available to men and women; 8 and 9 are also in Women's; 11-18 are Women's only", () => {
   const men = products.filter(product => product.genders.includes("men")).map(product => product.id);
-  assert.deepEqual(men, [1, 2, 3, 4, 23, 24, 25, 7, 8, 9, 10]);
+  assert.deepEqual(men, [1, 2, 3, 4, 23, 25, 7, 8, 9, 10]);
 
   const womenOnly = products.filter(product => !product.genders.includes("men")).map(product => product.id);
   assert.deepEqual(womenOnly, [11, 12, 13, 14, 15, 16, 17, 18]);
@@ -29,7 +29,7 @@ test("Sweatshirts are available to men and women; 8 and 9 are also in Women's; 1
 test("all current sweatshirt display names are descriptive", () => {
   assert.deepEqual(
     products.filter(product => product.category === "sweatshirt").map(product => product.name),
-    ["Sage Curve Sweatshirt", "Ivory Panel Sweatshirt", "Graphite Panel Sweatshirt", "Mocha Curve Sweatshirt", "Urban Panel Sweatshirt", "Forest Collared Zip Sweatshirt", "Forest Collared Half-Zip Sweatshirt"]
+    ["Sage Curve Sweatshirt", "Ivory Panel Sweatshirt", "Graphite Panel Sweatshirt", "Mocha Curve Sweatshirt", "Urban Panel Sweatshirt", "Forest Collared Half-Zip Sweatshirt"]
   );
 });
 
@@ -41,8 +41,8 @@ test("replacement sweatshirt pricing stays within ₹1,999–₹3,999 with MRPs 
     assert.ok(item.oldPrice >= 5999 && item.oldPrice <= 8999, `${item.name} MRP`);
   }
 
-  const addedSweatshirts = products.filter(product => [23, 24].includes(product.id));
-  assert.equal(addedSweatshirts.length, 2);
+  const addedSweatshirts = products.filter(product => [23].includes(product.id));
+  assert.equal(addedSweatshirts.length, 1);
   for (const item of addedSweatshirts) {
     assert.equal(item.price, 3999, `${item.name} price`);
     assert.ok(item.oldPrice >= 5999 && item.oldPrice <= 7999, `${item.name} MRP`);
@@ -134,6 +134,14 @@ test("shared sweatshirt images use one canonical asset each with no retired dupl
   }
 });
 
+
+
+
+test("Forest Collared Zip Sweatshirt is retired from the current catalogue", () => {
+  assert.equal(byId(24), undefined);
+  assert.equal(products.some(product => product.name === "Forest Collared Zip Sweatshirt"), false);
+  assert.equal(fs.existsSync(path.join(__dirname, "..", "assets/images/sweatshirt-collared-zip.webp")), false);
+});
 
 test("new forest half-zip sweatshirt is in the current catalogue", () => {
   const item = byId(25);

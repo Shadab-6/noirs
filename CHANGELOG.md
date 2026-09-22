@@ -1,3 +1,15 @@
+## 2.3.8.2 — Replace Forest Collared Zip
+- Retired the Forest Collared Zip Sweatshirt from the current Shop and Home catalogues.
+- Replaced the retired product slot with the Forest Collared Half-Zip Sweatshirt at ₹1,999 (MRP ₹3,999).
+- Removed the retired product image from the frontend bundle.
+- Added a regression check preventing the retired product from returning to the current catalogue.
+
+## 2.3.8.2 — Retire Forest Collared Zip
+- Removed the Forest Collared Zip Sweatshirt from the current storefront catalogue.
+- Replaced its Shop/Home slot with the Forest Collared Half-Zip Sweatshirt (₹1,999, MRP ₹3,999).
+- Archived product ID 24 in Supabase instead of deleting it, preserving historical order references.
+- Removed the retired Forest Collared Zip image asset from the frontend bundle.
+
 ## 2.3.8.1
 
 - Added a database migration that retires duplicate active sweatshirt rows 19–22 while preserving their IDs for historical orders.

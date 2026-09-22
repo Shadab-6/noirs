@@ -19,10 +19,20 @@ test("product rendering escapes backend-controlled image URLs", () => {
 });
 
 
+test("home and API current sweatshirt sets replace retired product 24 with 25", () => {
+  const home = fs.readFileSync(path.join(root, "assets", "js", "products.js"), "utf8");
+  const api = fs.readFileSync(path.join(root, "assets", "js", "noir-api.js"), "utf8");
+  assert.match(home, /FEATURED_SWEATSHIRT_IDS = \[19, 20, 21, 22, 23, 25\]/);
+  assert.match(api, /CURRENT_SWEATSHIRT_IDS = new Set\(\[23, 25\]\)/);
+  assert.doesNotMatch(home, /FEATURED_SWEATSHIRT_IDS = \[[^\]]*24/);
+  assert.doesNotMatch(api, /CURRENT_SWEATSHIRT_IDS = new Set\(\[[^\]]*24/);
+});
+
+
 test("canonical sweatshirt catalogue has no duplicate replacement IDs", () => {
   const products = JSON.parse(fs.readFileSync(path.join(root, "assets", "data", "product.json"), "utf8"));
   const ids = new Set(products.map(p => p.id));
   assert.equal(ids.size, products.length);
-  for (const id of [1, 2, 3, 4, 23, 24, 25]) assert.ok(ids.has(id));
+  for (const id of [1, 2, 3, 4, 23, 25]) assert.ok(ids.has(id));
   for (const id of [19, 20, 21, 22]) assert.equal(ids.has(id), false);
 });

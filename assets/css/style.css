@@ -1,0 +1,35 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#f1faee;
+  color:#000;
+}
+
+.container{
+  width:90%;
+  max-width:1400px;
+  margin:auto;
+}
+
+img{
+  width:100%;
+  display:block;
+}
+
+button{
+  cursor:pointer;
+  border:none;
+}
+
+/* NOIR form focus: keep the UI rounded and prevent sharp browser focus rectangles. */
+input:not([type=checkbox]):not([type=radio]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+}

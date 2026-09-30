@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign in · NOIR Admin</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
+  .login-wrap{width:100%;max-width:380px;}
+  .login-logo{font-family:var(--noir-serif);font-size:28px;letter-spacing:.02em;text-align:center;margin-bottom:26px;}
+  .login-card{background:var(--noir-white);border:1px solid var(--noir-border);border-radius:var(--noir-radius);box-shadow:var(--noir-shadow);padding:28px 26px;}
+  .login-card h1{font-size:19px;margin:0 0 4px;}
+  .login-card .sub{font-size:13px;color:var(--noir-gray);margin:0 0 22px;}
+  .login-alert{display:none;font-size:13px;color:var(--noir-danger);background:var(--noir-danger-bg);border-radius:8px;padding:10px 12px;margin-bottom:16px;}
+  .login-alert.show{display:block;}
+  .login-note{display:none;font-size:12.5px;color:var(--noir-gray);text-align:center;margin-top:16px;line-height:1.5;}
+  .login-note.show{display:block;}
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-logo">NOIR.</div>
+  <div class="login-card">
+    <h1>Admin sign in</h1>
+    <p class="sub">Sign in with your NOIR account. Access is restricted to admins.</p>
+    <div class="login-alert" id="loginAlert" role="alert"></div>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="loginEmail" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn block" id="loginSubmit">Sign in</button>
+    </form>
+    <form id="mfaForm" novalidate style="display:none;">
+      <p class="sub" style="margin-top:-6px;">Enter the 6-digit code from your authenticator app.</p>
+      <div class="field">
+        <label>Authentication Code</label>
+        <input type="text" id="mfaCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+      </div>
+      <button type="submit" class="btn block" id="mfaSubmit">Verify</button>
+      <button type="button" class="btn outline block mt10" id="mfaBack">Back</button>
+    </form>
+    <p class="login-note" id="firstAdminNote">This is the first sign-in to the admin panel — your account will automatically become the admin.</p>
+  </div>
+</div>
+<script src="../assets/js/supabase-config.js"></script>
+<script src="../assets/js/noir-auth.js"></script>
+<script src="../assets/js/noir-admin-api.js"></script>
+<script>
+(async function () {
+  var form = document.getElementById("loginForm");
+  var mfaForm = document.getElementById("mfaForm");
+  var alertBox = document.getElementById("loginAlert");
+  var submitBtn = document.getElementById("loginSubmit");
+  var params = new URLSearchParams(location.search);
+  var pendingFactorId = null, pendingChallengeId = null;
+
+  function showAlert(msg) { alertBox.textContent = msg; alertBox.classList.add("show"); }
+
+  function showMfaStep(session) {
+    var factor = (session.user.factors || []).find(function (f) { return f.status === "verified"; });
+    if (!factor) { showAlert("Two-factor verification is required, but no authenticator is enrolled on this account. Contact another admin."); return; }
+    pendingFactorId = factor.id;
+    NoirAuth.mfaChallenge(factor.id).then(function (result) {
+      if (result.error) { showAlert(result.error); return; }
+      pendingChallengeId = result.challengeId;
+      form.style.display = "none";
+      mfaForm.style.display = "block";
+      document.getElementById("mfaCode").focus();
+    });
+  }
+
+  async function afterPasswordSignIn(session) {
+    var token = session.accessToken;
+    var isAdmin = await NoirAdminApi.amIAdmin(token);
+    if (!isAdmin) {
+      isAdmin = await NoirAdminApi.bootstrapAdmin(token).catch(function () { return false; });
+    }
+    if (!isAdmin) {
+      showAlert("That account doesn't have admin access to NOIR.");
+      return;
+    }
+    if (NoirAuth.needsMfaStepUp(session)) {
+      showMfaStep(session);
+      return;
+    }
+    location.href = "pages/dashboard.html";
+  }
+
+  if (params.get("denied") === "not_admin") {
+    showAlert("That account doesn't have admin access to NOIR.");
+  } else if (params.get("denied") === "error") {
+    showAlert("Something went wrong checking admin access. Please sign in again.");
+  }
+
+  // Already signed in? Skip straight to the dashboard if that account is an admin (still asks
+  // for a 2FA code if the session hasn't completed one yet).
+  var existing = await NoirAuth.getSession();
+  if (existing) {
+    try { await afterPasswordSignIn(existing); } catch (e) { /* fall through to the login form */ }
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    alertBox.classList.remove("show");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Signing in…";
+
+    var email = document.getElementById("loginEmail").value.trim();
+    var password = document.getElementById("loginPassword").value;
+
+    try {
+      var result = await NoirAuth.signIn({ email: email, password: password });
+      if (result.error) { showAlert(result.error); return; }
+      await afterPasswordSignIn(result.session);
+    } catch (error) {
+      showAlert(error.message || "Something went wrong. Please try again.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Sign in";
+    }
+  });
+
+  mfaForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    alertBox.classList.remove("show");
+    var code = document.getElementById("mfaCode").value.trim();
+    if (!/^\d{6}$/.test(code)) { showAlert("Enter the 6-digit code."); return; }
+    var btn = document.getElementById("mfaSubmit");
+    btn.disabled = true; btn.textContent = "Verifying…";
+    try {
+      var result = await NoirAuth.mfaVerify(pendingFactorId, pendingChallengeId, code);
+      if (result.error) { showAlert(result.error); return; }
+      location.href = "pages/dashboard.html";
+    } finally {
+      btn.disabled = false; btn.textContent = "Verify";
+    }
+  });
+
+  document.getElementById("mfaBack").addEventListener("click", async function () {
+    await NoirAuth.signOut();
+    mfaForm.style.display = "none";
+    form.style.display = "block";
+    alertBox.classList.remove("show");
+  });
+})();
+</script>
+</body>
+</html>

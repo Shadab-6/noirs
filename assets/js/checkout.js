@@ -1026,9 +1026,28 @@
     if (!session && cart.length > 0 && !state.placed) showGate();
   }
 
+  async function syncCartWithProductData() {
+    try {
+      const products = await NoirApi.getProducts();
+      let updated = false;
+      cart.forEach(item => {
+        const product = products.find(p => String(p.id) === String(item.id));
+        if (product && (!item.sizes || item.sizes.length === 0)) {
+          item.sizes = product.sizes;
+          updated = true;
+        }
+      });
+      if (updated) {
+        saveCart();
+      }
+    } catch (e) {
+      console.error("Failed to sync cart", e);
+    }
+  }
+
   /* ---------------------------------------------------------------- init */
 
-  function init() {
+  async function init() {
     // State dropdown
     Shared.STATES.forEach(name => {
       const option = document.createElement("option");
@@ -1060,6 +1079,7 @@
       }
     }
 
+    await syncCartWithProductData();
     refresh();
     checkAccount();
     syncWithBackend();

@@ -1,3 +1,23 @@
-node_modules/
+# Generated files
+graphify-out/
+generate_graph.js
+
+# Claude Code local configuration
+.claude/
+
+# Claude MCP local configuration
+.mcp.json
+
+# Environment / secrets
 .env
-.DS_Store
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Logs / temporary files
+*.log
+tmp/
+read_all.sh
+tmp_read.txt

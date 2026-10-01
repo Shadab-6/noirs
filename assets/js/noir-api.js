@@ -24,15 +24,6 @@
   const SHIPPING_SELECT = "id,label,eta,minDays:min_days,maxDays:max_days,fee,freeFrom:free_from";
   const LOCAL_PRODUCTS_URL = "assets/data/product.json";
   const CURRENT_SWEATSHIRT_IDS = new Set([23, 25]);
-  // Frontend replacement rows for legacy product IDs 1–4. The live database
-  // may still contain archived versions of these IDs, so the storefront
-  // intentionally uses these code-owned rows and image paths instead.
-  const LEGACY_REPLACEMENTS = [
-    { id: 1, name: "Sage Curve Sweatshirt", price: 2999, oldPrice: 6999, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item1(1).png" },
-    { id: 2, name: "Ivory Panel Sweatshirt", price: 2499, oldPrice: 7499, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item2(1).png" },
-    { id: 3, name: "Graphite Panel Sweatshirt", price: 3499, oldPrice: 7999, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item3(1).png" },
-    { id: 4, name: "Mocha Curve Sweatshirt", price: 1999, oldPrice: 8999, category: "sweatshirt", genders: ["men", "women"], sizes: ["S", "M", "L", "XL"], sale: true, popular: true, image: "assets/images/item4(1).png" }
-  ];
 
   let productsPromise = null;
   let shippingPromise = null;
@@ -93,13 +84,6 @@
   async function mergeCurrentCollection(rows) {
     const apiRows = Array.isArray(rows) ? rows : [];
     const merged = new Map(apiRows.map(product => [Number(product.id), product]));
-
-    // Always replace the four legacy storefront rows with the new sweatshirt
-    // catalogue owned by the frontend code. This works even when those IDs
-    // remain archived in Supabase, so no backend migration is required.
-    for (const product of LEGACY_REPLACEMENTS) {
-      merged.set(Number(product.id), product);
-    }
 
     try {
       const localRows = await loadLocalProducts();
